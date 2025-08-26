@@ -1,0 +1,125 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Organization {
+  id            String    @id @default(uuid())
+  name          String
+  country       String    // DE or UA
+  type          String    // NGO, Foundation, Association, etc
+  contactEmail  String
+  contactPhone  String?
+  address       String?
+  website       String?
+  description   String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  applications  Application[]
+  users         User[]
+}
+
+model User {
+  id              String    @id @default(uuid())
+  email           String    @unique
+  name            String
+  role            String    // admin, member
+  organizationId  String
+  organization    Organization @relation(fields: [organizationId], references: [id])
+  language        String    @default("de") // de, uk, en
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  applications    Application[]
+  sessions        Session[]
+}
+
+model Application {
+  id              String    @id @default(uuid())
+  organizationId  String
+  organization    Organization @relation(fields: [organizationId], references: [id])
+  userId          String
+  user            User @relation(fields: [userId], references: [id])
+  
+  programType     String    // EU_HORIZON, ERASMUS_PLUS, CREATIVE_EUROPE, etc
+  callIdentifier  String?   // Specific call ID
+  title           String
+  acronym         String?
+  status          String    @default("draft") // draft, in_progress, submitted, approved, rejected
+  
+  // Project details
+  abstract        String?   @db.Text
+  objectives      Json?     // Array of objectives
+  workPackages    Json?     // Array of work packages
+  consortium      Json?     // Partner organizations
+  budget          Json?     // Budget breakdown
+  impact          String?   @db.Text
+  innovation      String?   @db.Text
+  
+  // AI assistance tracking
+  aiSessions      Json?     // History of AI interactions
+  completionRate  Float     @default(0)
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  submittedAt     DateTime?
+  
+  sessions        Session[]
+  documents       Document[]
+}
+
+model Session {
+  id            String    @id @default(uuid())
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id])
+  userId        String
+  user          User @relation(fields: [userId], references: [id])
+  
+  messages      Json      // Array of chat messages
+  currentStep   String?   // Current step in the application process
+  metadata      Json?     // Additional session data
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Document {
+  id            String    @id @default(uuid())
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id])
+  
+  type          String    // proposal, budget, cv, support_letter, etc
+  filename      String
+  url           String?
+  content       String?   @db.Text
+  version       Int       @default(1)
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Template {
+  id            String    @id @default(uuid())
+  programType   String    // EU_HORIZON, ERASMUS_PLUS, etc
+  name          String
+  description   String?
+  language      String    // de, uk, en
+  
+  structure     Json      // Template structure with sections and prompts
+  examples      Json?     // Example content
+  tips          Json?     // Tips and best practices
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}

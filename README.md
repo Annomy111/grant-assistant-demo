@@ -1,36 +1,205 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# KI-Antragsassistent für EU-Förderanträge
 
-## Getting Started
+Eine KI-gestützte Webanwendung, die zivilgesellschaftliche Organisationen in Deutschland und der Ukraine bei der Erstellung von EU-Förderanträgen unterstützt.
 
-First, run the development server:
+## Features
 
+### 🎯 Kernfunktionen
+- **Schritt-für-Schritt Anleitung**: Geführter Prozess durch alle Abschnitte eines EU Horizon Europe Antrags
+- **KI-Unterstützung**: Intelligente Textvorschläge und Formulierungshilfen durch DeepSeek AI
+- **Mehrsprachigkeit**: Verfügbar in Deutsch, Ukrainisch und Englisch
+- **Dokumenten-Export**: Export als PDF oder Word-Dokument
+
+### 📊 EU Horizon Europe Vorlage
+- **Excellence**: Ziele, Methodik und Innovation
+- **Impact**: Erwartete Wirkung und Verbreitung
+- **Implementation**: Arbeitsplan, Ressourcen und Konsortium
+
+### 💡 Benutzerfreundliches Interface
+- Chat-basierte Interaktion für intuitive Bedienung
+- Fortschrittsanzeige für alle Antragsschritte
+- Quick Actions für häufige Anfragen
+- Beispielprojekte und Best Practices
+
+## Technologie-Stack
+
+- **Frontend**: Next.js 14, TypeScript, Tailwind CSS
+- **KI-Integration**: DeepSeek AI API
+- **Datenbank**: Neon (PostgreSQL) mit Prisma ORM
+- **UI-Komponenten**: Radix UI, Lucide Icons
+- **Export**: HTML zu PDF/Word Konvertierung
+
+## Installation
+
+1. Repository klonen:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd grant-assistant
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Abhängigkeiten installieren:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Umgebungsvariablen konfigurieren:
+```bash
+cp .env.local.example .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Fügen Sie Ihre Credentials in `.env.local` ein:
+```env
+# Neon Database
+DATABASE_URL="postgresql://user:password@host/database?sslmode=require"
 
-## Learn More
+# DeepSeek API
+DEEPSEEK_API_KEY="your-deepseek-api-key"
+DEEPSEEK_API_URL="https://api.deepseek.com/v1"
 
-To learn more about Next.js, take a look at the following resources:
+# App Settings
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Datenbank einrichten:
+```bash
+npx prisma generate
+npx prisma db push
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+5. Entwicklungsserver starten:
+```bash
+npm run dev
+```
 
-## Deploy on Vercel
+Die App ist nun unter `http://localhost:3000` verfügbar.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Projektstruktur
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+grant-assistant/
+├── src/
+│   ├── app/                    # Next.js App Router
+│   │   ├── api/                # API Routes
+│   │   │   └── chat/           # Chat-Endpunkt
+│   │   ├── layout.tsx          # Root Layout
+│   │   └── page.tsx            # Hauptseite
+│   ├── components/             # React Komponenten
+│   │   ├── chat/               # Chat-Komponenten
+│   │   │   ├── ChatInterface.tsx
+│   │   │   ├── ChatMessage.tsx
+│   │   │   ├── ChatInput.tsx
+│   │   │   ├── StepIndicator.tsx
+│   │   │   └── QuickActions.tsx
+│   │   ├── ExportDialog.tsx    # Export-Dialog
+│   │   └── LanguageSelector.tsx # Sprachauswahl
+│   ├── contexts/               # React Contexts
+│   │   └── LanguageContext.tsx # Mehrsprachigkeit
+│   ├── lib/                    # Utilities und Services
+│   │   ├── ai/                 # KI-Integration
+│   │   │   ├── deepseek.ts     # DeepSeek Client
+│   │   │   └── grant-assistant.ts # Antrags-Logik
+│   │   ├── export/             # Export-Funktionen
+│   │   │   └── document-generator.ts
+│   │   ├── i18n/               # Übersetzungen
+│   │   │   └── translations.ts
+│   │   └── utils.ts            # Hilfsfunktionen
+│   └── generated/              # Generierte Dateien
+│       └── prisma/             # Prisma Client
+├── prisma/
+│   └── schema.prisma           # Datenbank-Schema
+├── public/                     # Statische Dateien
+└── package.json               # Projekt-Dependencies
+```
+
+## Nutzung
+
+### 1. Projekt starten
+- Öffnen Sie die Hauptseite
+- Klicken Sie auf "Jetzt Antrag erstellen"
+
+### 2. Grundinformationen eingeben
+- Name der Organisation
+- Projekttitel
+- Land (Deutschland/Ukraine)
+- Projektbeschreibung
+
+### 3. Antragsabschnitte bearbeiten
+Die KI führt Sie durch:
+- **Excellence**: Projektziele und innovative Aspekte
+- **Impact**: Erwartete Auswirkungen und Verbreitung
+- **Implementation**: Arbeitsplan und Ressourcenplanung
+
+### 4. Dokument exportieren
+- Wählen Sie zwischen PDF oder Word-Format
+- Das Dokument enthält alle eingegebenen Informationen
+
+## API-Endpoints
+
+### POST /api/chat
+Hauptendpunkt für die Chat-Kommunikation
+
+```typescript
+{
+  message: string;          // Benutzernachricht
+  applicationId?: string;   // Antrags-ID
+  currentStep: string;      // Aktueller Schritt
+  history: Message[];       // Chatverlauf
+}
+```
+
+## Datenbank-Schema
+
+### Hauptmodelle:
+- **Organization**: Organisationsdaten
+- **User**: Benutzerprofile
+- **Application**: Förderanträge
+- **Session**: Chat-Sitzungen
+- **Document**: Generierte Dokumente
+- **Template**: Antragsvorlagen
+
+## Deployment
+
+### Vercel Deployment
+```bash
+vercel
+```
+
+### Docker Deployment
+```bash
+docker build -t grant-assistant .
+docker run -p 3000:3000 grant-assistant
+```
+
+## Sicherheit
+
+- Alle API-Schlüssel in Umgebungsvariablen
+- Verschlüsselte Datenbankverbindung
+- Keine Speicherung sensibler Daten im Frontend
+- GDPR-konforme Datenverarbeitung
+
+## Roadmap
+
+- [ ] Weitere Förderprogramme (Erasmus+, Creative Europe)
+- [ ] Kollaborative Bearbeitung
+- [ ] Budgetrechner mit Visualisierung
+- [ ] Integration mit EU-Submission-Portalen
+- [ ] Offline-Modus
+- [ ] Mobile Apps (iOS/Android)
+
+## Support
+
+Für Fragen und Unterstützung:
+- Erstellen Sie ein Issue im GitHub Repository
+- Kontaktieren Sie das Entwicklungsteam
+
+## Lizenz
+
+MIT License - siehe LICENSE Datei für Details
+
+## Mitwirkende
+
+Entwickelt für zivilgesellschaftliche Organisationen in Deutschland und der Ukraine zur Förderung der europäischen Zusammenarbeit.
+
+---
+
+**Hinweis**: Dies ist ein Prototyp für Demonstrationszwecke. Für den Produktiveinsatz sind weitere Konfigurationen und Sicherheitsmaßnahmen erforderlich.

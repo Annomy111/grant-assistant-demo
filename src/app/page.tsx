@@ -1,103 +1,144 @@
-import Image from "next/image";
+'use client';
+
+import { useState } from 'react';
+import { ChatInterface } from '@/components/chat/ChatInterface';
+import { FileText, Users, Globe, Shield } from 'lucide-react';
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [showChat, setShowChat] = useState(false);
+  const [currentStep, setCurrentStep] = useState('introduction');
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {!showChat ? (
+        <div className="container mx-auto px-4 py-8">
+          {/* Header */}
+          <header className="text-center mb-12">
+            <h1 className="text-4xl font-bold text-gray-800 mb-4">
+              KI-Antragsassistent
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Unterstützung für zivilgesellschaftliche Organisationen in Deutschland und der Ukraine bei der Erstellung von EU-Förderanträgen
+            </p>
+          </header>
+
+          {/* Features */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <FeatureCard
+              icon={<FileText className="w-8 h-8" />}
+              title="EU Horizon Europe"
+              description="Schritt-für-Schritt Anleitung für Horizon Europe Anträge"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <FeatureCard
+              icon={<Users className="w-8 h-8" />}
+              title="KI-Unterstützung"
+              description="Intelligente Vorschläge und Formulierungshilfen"
+            />
+            <FeatureCard
+              icon={<Globe className="w-8 h-8" />}
+              title="Mehrsprachig"
+              description="Verfügbar in Deutsch, Ukrainisch und Englisch"
+            />
+            <FeatureCard
+              icon={<Shield className="w-8 h-8" />}
+              title="Datenschutz"
+              description="Ihre Daten bleiben sicher und vertraulich"
+            />
+          </div>
+
+          {/* Sample Project Walk-through */}
+          <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+              Beispielhafter EU Horizon Antrag
+            </h2>
+            <div className="prose max-w-none text-gray-600">
+              <h3 className="text-lg font-semibold mt-4 mb-2">
+                Projekt: "Digital Bridges for Civil Society"
+              </h3>
+              <p className="mb-4">
+                Ein Kooperationsprojekt zwischen deutschen und ukrainischen NGOs zur Entwicklung 
+                digitaler Werkzeuge für zivilgesellschaftliches Engagement.
+              </p>
+              
+              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
+                <h4 className="font-semibold mb-2">Excellence (Exzellenz)</h4>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>Innovative digitale Plattform für grenzüberschreitende Zusammenarbeit</li>
+                  <li>Neue Methoden für virtuelle Partizipation und Engagement</li>
+                  <li>Integration von KI für automatische Übersetzung und kulturelle Anpassung</li>
+                </ul>
+              </div>
+
+              <div className="bg-green-50 border-l-4 border-green-500 p-4 mb-4">
+                <h4 className="font-semibold mb-2">Impact (Wirkung)</h4>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>Stärkung von 50+ Organisationen in beiden Ländern</li>
+                  <li>Erreichen von 10.000+ Bürgern durch digitale Teilhabe</li>
+                  <li>Nachhaltige Partnerschaften und Wissenstransfer</li>
+                </ul>
+              </div>
+
+              <div className="bg-purple-50 border-l-4 border-purple-500 p-4 mb-4">
+                <h4 className="font-semibold mb-2">Implementation (Umsetzung)</h4>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>24 Monate Projektlaufzeit mit 6 Arbeitspaketen</li>
+                  <li>Konsortium aus 5 Partnern (3 DE, 2 UA)</li>
+                  <li>Budget: 1,5 Millionen EUR</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div className="text-center">
+            <button
+              onClick={() => setShowChat(true)}
+              className="bg-blue-500 hover:bg-blue-600 text-white text-lg font-semibold px-8 py-4 rounded-lg shadow-lg transition-colors"
+            >
+              Jetzt Antrag erstellen
+            </button>
+            <p className="mt-4 text-gray-600">
+              Keine Registrierung erforderlich - starten Sie direkt!
+            </p>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      ) : (
+        <div className="h-screen flex flex-col">
+          <header className="bg-white border-b px-4 py-3 flex items-center justify-between">
+            <h1 className="text-xl font-semibold text-gray-800">
+              KI-Antragsassistent
+            </h1>
+            <button
+              onClick={() => setShowChat(false)}
+              className="text-gray-600 hover:text-gray-800"
+            >
+              Zurück zur Übersicht
+            </button>
+          </header>
+          <div className="flex-1 overflow-hidden">
+            <ChatInterface 
+              currentStep={currentStep}
+              onStepChange={setCurrentStep}
+            />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+interface FeatureCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}
+
+function FeatureCard({ icon, title, description }: FeatureCardProps) {
+  return (
+    <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
+      <div className="text-blue-500 mb-4">{icon}</div>
+      <h3 className="text-lg font-semibold text-gray-800 mb-2">{title}</h3>
+      <p className="text-gray-600">{description}</p>
     </div>
   );
 }
