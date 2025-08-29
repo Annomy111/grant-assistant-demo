@@ -1,3 +1,6 @@
+import { translationsUk } from './translations-uk';
+import { translationsEn } from './translations-en';
+
 export const translations = {
   de: {
     common: {
@@ -12,46 +15,195 @@ export const translations = {
       success: 'Erfolgreich',
     },
     landing: {
-      title: 'KI-Antragsassistent',
-      subtitle: 'Unterstützung für zivilgesellschaftliche Organisationen in Deutschland und der Ukraine bei der Erstellung von EU-Förderanträgen',
-      features: {
-        horizon: {
-          title: 'EU Horizon Europe',
-          description: 'Schritt-für-Schritt Anleitung für Horizon Europe Anträge',
-        },
-        ai: {
-          title: 'KI-Unterstützung',
-          description: 'Intelligente Vorschläge und Formulierungshilfen',
-        },
-        multilingual: {
-          title: 'Mehrsprachig',
-          description: 'Verfügbar in Deutsch, Ukrainisch und Englisch',
-        },
-        privacy: {
-          title: 'Datenschutz',
-          description: 'Ihre Daten bleiben sicher und vertraulich',
-        },
+      title: 'DEUTSCH-UKRAINISCHES BÜRO',
+      subtitle: 'Analytics • Advocacy • Solutions',
+      heroTitle: 'Ihr Wegweiser zu EU-Förderungen',
+      heroSubtitle: 'Professionelle Unterstützung für deutsche und ukrainische Organisationen bei EU-Anträgen',
+      startButton: 'Jetzt starten',
+      learnMore: 'Mehr erfahren',
+    },
+    horizonInfo: {
+      title: 'Horizon Europe 2025 – Das weltweit größte Forschungsprogramm',
+      budget: {
+        value: '€438 Mio',
+        description: 'Cluster 2 Budget 2025 (+34% vs 2024)',
       },
-      cta: {
-        start: 'Jetzt Antrag erstellen',
-        noRegistration: 'Keine Registrierung erforderlich - starten Sie direkt!',
+      funding: {
+        value: '100%',
+        description: 'Förderquote für Forschung',
       },
-      example: {
-        title: 'Beispielhafter EU Horizon Antrag',
-        projectName: 'Projekt: "Digital Bridges for Civil Society"',
-        description: 'Ein Kooperationsprojekt zwischen deutschen und ukrainischen NGOs zur Entwicklung digitaler Werkzeuge für zivilgesellschaftliches Engagement.',
+      typical: {
+        value: '€2-5 Mio',
+        description: 'Typische Projektförderung',
+      },
+      pillar1: {
+        title: 'Pillar I: Excellent Science',
+        description: 'European Research Council (ERC), Marie Skłodowska-Curie Actions, Research Infrastructures',
+      },
+      pillar2: {
+        title: 'Pillar II: Global Challenges',
+        description: 'Health, Culture, Civil Security, Digital, Climate, Energy, Mobility, Food & Natural Resources',
+      },
+      pillar3: {
+        title: 'Pillar III: Innovative Europe',
+        description: 'European Innovation Council, European Innovation Ecosystems, European Institute of Innovation',
       },
     },
-    chat: {
-      assistant: 'KI-Assistent',
-      you: 'Sie',
-      placeholder: 'Schreiben Sie Ihre Nachricht...',
-      quickActions: {
-        help: 'Hilfe',
-        example: 'Beispiel zeigen',
-        skip: 'Überspringen',
-        review: 'Überprüfen',
+    process: {
+      title: 'Unser Prozess',
+      step1: {
+        title: 'Projektanalyse & Beratung',
+        description: 'Evaluation Ihrer Projektidee, Identifikation passender Förderprogramme und Calls, Machbarkeitsanalyse und strategische Beratung.',
       },
+      step2: {
+        title: 'Konsortiumsbildung',
+        description: 'Partnersuche in Deutschland und Ukraine, Netzwerkzugang zu Forschungseinrichtungen, NGOs und Unternehmen, Koordination der Zusammenarbeit.',
+      },
+      step3: {
+        title: 'Antragsstellung',
+        description: 'KI-gestützte Formulierungshilfen, Budgetplanung und Work Package Strukturierung, Impact Assessment und Dissemination Strategy.',
+      },
+      step4: {
+        title: 'Review & Einreichung',
+        description: 'Qualitätskontrolle durch Experten, Compliance Check, technische Unterstützung bei der Einreichung über das EU Portal.',
+      },
+    },
+    ukraine: {
+      title: 'Ukraine-Spezifische Möglichkeiten',
+      horizon: {
+        title: 'Horizon Europe für Ukraine',
+        item1: '<strong>Volle Assoziierung seit 09.06.2022:</strong> Gleichberechtigte Teilnahme, keine Finanzbeiträge erforderlich',
+        item2: '<strong>Horizon Europe Office Kyiv:</strong> Eröffnet Dezember 2023 für technische Unterstützung',
+        item3: '<strong>Verpflichtende UA-Teilnahme 2025:</strong> Spezifische Topics in Cluster 3 & 4',
+      },
+      msca: {
+        title: 'MSCA4Ukraine Status 2025',
+        item1: '<strong>176 Forschende unterstützt:</strong> In 24 Gastländern (Stand: Q1 2025)',
+        item2: '<strong>Management-Call offen:</strong> Bis 16.09.2025 für Verwaltungsorganisation',
+        item3: '<strong>Keine weiteren Fellowship-Calls:</strong> Aktuell keine neuen Ausschreibungen geplant',
+      },
+      historicalSuccess: '<strong>Historischer Erfolg:</strong> Unter Horizon 2020 war Ukraine an 230 Projekten mit 323 Teilnehmern beteiligt (€45.5M Förderung) - besonders stark in MSCA, Energie und Klima.',
+    },
+    cerv: {
+      title: 'CERV Programme – Ukraine seit 09.01.2024 assoziiert',
+      description: '<strong>NEU:</strong> Ukraine nimmt seit Januar 2024 am CERV-Programm teil. Zugang zu allen Bereichen außer "Union Values". Besonderer Fokus auf Kinder aus der Ukraine in der CERV-2025-CHILD Ausschreibung (29.04.2025 Deadline).',
+      area1: {
+        title: 'Gleichheit & Rechte',
+        description: 'Anti-Diskriminierung und Gleichstellung',
+      },
+      area2: {
+        title: 'Bürgerbeteiligung',
+        description: 'Demokratische Partizipation',
+      },
+      area3: {
+        title: 'Daphne',
+        description: 'Gewaltprävention und Opferschutz',
+      },
+      area4: {
+        title: 'EU-Werte',
+        description: 'Förderung gemeinsamer Werte',
+      },
+    },
+    expertise: {
+      title: 'Unsere Expertise',
+      cooperation: {
+        title: 'EU-Ukraine Kooperation',
+        description: 'Als Deutsch-Ukrainisches Büro verfügen wir über einzigartige Expertise in der Förderung bilateraler Kooperationen. Wir kennen die regulatorischen Rahmenbedingungen beider Länder und unterstützen Sie bei:',
+        item1: 'Associated Country Status der Ukraine in Horizon Europe',
+        item2: 'Civil Society Facility Programme',
+        item3: 'ERASMUS+ Capacity Building',
+      },
+      thematic: {
+        title: 'Thematische Schwerpunkte',
+        description: 'Unsere Expertise erstreckt sich über verschiedene Horizon Europe Cluster mit besonderem Fokus auf:',
+        cluster2: 'Cluster 2: Culture, Creativity & Inclusive Society',
+        cluster3: 'Cluster 3: Civil Security for Society',
+        cluster6: 'Cluster 6: Food, Bioeconomy & Natural Resources',
+      },
+    },
+    deadlines: {
+      title: 'Aktuelle Ausschreibungen 2025',
+      important: 'Wichtige Termine 2025',
+      date1: '15. Mai 2025: Cluster 2 Calls öffnen & Info Day',
+      date2: '16. Mai 2025: Brokerage Event für Konsortiumsbildung',
+      date3: '16. September 2025: Deadline für alle Cluster 2 Calls (First Stage)',
+      date4: '17. März 2026: Second Stage Deadline für zweistufige Calls',
+      date5: 'November 2025: Erwartete Cluster 3 Calls mit UA-Verpflichtung',
+      deadline: 'Deadline',
+      expected: 'Erwartet',
+      call1: {
+        description: 'Counter disinformation & FIMI (€3-3.5M per project)',
+      },
+      call2: {
+        description: 'Understanding autocratic appeal (€10.5M total, nature & drivers research)',
+      },
+      call3: {
+        description: 'Cultural Heritage topics (€82.5M total budget, €2.5-4M per project)',
+      },
+      call4: {
+        description: 'Organization to manage next phase (No new fellowships planned)',
+      },
+      call5: {
+        description: "Children's rights incl. Ukrainian refugees (Deadline: 29.04.2025)",
+      },
+    },
+    features: {
+      title: 'Plattform Features',
+      templates: {
+        title: 'Template Library',
+        description: 'Vorgefertigte Templates für alle Horizon Europe Antragstypen',
+      },
+      partners: {
+        title: 'Partner Matching',
+        description: 'Zugang zu unserem Netzwerk qualifizierter Projektpartner',
+      },
+      multilingual: {
+        title: 'Multilingual',
+        description: 'Verfügbar in Deutsch, Ukrainisch und Englisch',
+      },
+      gdpr: {
+        title: 'GDPR Compliant',
+        description: 'Vollständige Datenschutz-Compliance nach EU-Standards',
+      },
+    },
+    cta: {
+      title: 'Bereit für Ihren EU-Antrag?',
+      subtitle: 'Nutzen Sie unsere KI-gestützte Plattform und die Expertise des Deutsch-Ukrainischen Büros für Ihren erfolgreichen EU-Förderantrag.',
+      button: 'Jetzt Starten',
+      disclaimer: 'Keine Registrierung erforderlich • Kostenlose Erstberatung',
+    },
+    navigation: {
+      back: 'Zurück zur Übersicht',
+    },
+    chat: {
+      welcome: `Willkommen beim KI-Antragsassistenten! 🎯
+
+Ich helfe Ihnen bei der Erstellung Ihres EU Horizon Europe Antrags. Der Prozess ist in übersichtliche Schritte unterteilt:
+
+1. **Grundlegende Informationen** - Organisation und Projektübersicht
+2. **Excellence** - Ziele und Methodik
+3. **Impact** - Erwartete Wirkung und Verbreitung
+4. **Implementation** - Arbeitsplan und Ressourcen
+
+Lassen Sie uns mit den grundlegenden Informationen beginnen. Wie heißt Ihre Organisation?`,
+      validationError: 'Validierungsfehler',
+      errorMessage: 'Entschuldigung, es gab einen Fehler. Bitte versuchen Sie es erneut.',
+      inputPlaceholder: 'Schreiben Sie Ihre Nachricht...',
+      attachFile: 'Datei anhängen',
+      voiceInput: 'Spracheingabe',
+      quickActions: {
+        cluster2Prompt: 'Welche Cluster 2 Calls öffnen im Mai 2025 und was sind die Schwerpunkte?',
+        cervUkrainePrompt: 'Welche CERV-Möglichkeiten gibt es für ukrainische Organisationen 2025?',
+        uaMandatoryPrompt: 'Bei welchen Topics ist die Ukraine-Teilnahme verpflichtend?',
+        twoStagePrompt: 'Wie funktioniert das zweistufige Antragsverfahren mit Deadlines 2025/2026?',
+      },
+    },
+    quickActions: {
+      templates: 'Templates',
+      cluster2: 'Cluster 2 (Mai 2025)',
+      cervUkraine: 'CERV für Ukraine',
+      uaMandatory: 'UA-Pflicht Topics',
+      twoStage: '2-Stage Prozess',
     },
     steps: {
       introduction: {
@@ -76,160 +228,8 @@ export const translations = {
       },
     },
   },
-  uk: {
-    common: {
-      welcome: 'Ласкаво просимо',
-      next: 'Далі',
-      back: 'Назад',
-      save: 'Зберегти',
-      cancel: 'Скасувати',
-      submit: 'Надіслати',
-      loading: 'Завантаження...',
-      error: 'Помилка',
-      success: 'Успішно',
-    },
-    landing: {
-      title: 'ШІ-асистент з грантових заявок',
-      subtitle: 'Підтримка організацій громадянського суспільства в Німеччині та Україні у створенні заявок на фінансування ЄС',
-      features: {
-        horizon: {
-          title: 'EU Horizon Europe',
-          description: 'Покрокова інструкція для заявок Horizon Europe',
-        },
-        ai: {
-          title: 'Підтримка ШІ',
-          description: 'Інтелектуальні пропозиції та допомога у формулюванні',
-        },
-        multilingual: {
-          title: 'Багатомовність',
-          description: 'Доступно німецькою, українською та англійською',
-        },
-        privacy: {
-          title: 'Захист даних',
-          description: 'Ваші дані залишаються в безпеці та конфіденційності',
-        },
-      },
-      cta: {
-        start: 'Створити заявку зараз',
-        noRegistration: 'Реєстрація не потрібна - почніть одразу!',
-      },
-      example: {
-        title: 'Приклад заявки EU Horizon',
-        projectName: 'Проект: "Цифрові мости для громадянського суспільства"',
-        description: 'Проект співпраці між німецькими та українськими НУО для розробки цифрових інструментів громадянської участі.',
-      },
-    },
-    chat: {
-      assistant: 'ШІ-асистент',
-      you: 'Ви',
-      placeholder: 'Напишіть ваше повідомлення...',
-      quickActions: {
-        help: 'Допомога',
-        example: 'Показати приклад',
-        skip: 'Пропустити',
-        review: 'Перевірити',
-      },
-    },
-    steps: {
-      introduction: {
-        title: 'Основи',
-        description: 'Організація та проект',
-      },
-      excellence: {
-        title: 'Досконалість',
-        description: 'Цілі та методологія',
-      },
-      impact: {
-        title: 'Вплив',
-        description: 'Ефект та поширення',
-      },
-      implementation: {
-        title: 'Впровадження',
-        description: 'План роботи та ресурси',
-      },
-      review: {
-        title: 'Перевірка',
-        description: 'Фінальний контроль',
-      },
-    },
-  },
-  en: {
-    common: {
-      welcome: 'Welcome',
-      next: 'Next',
-      back: 'Back',
-      save: 'Save',
-      cancel: 'Cancel',
-      submit: 'Submit',
-      loading: 'Loading...',
-      error: 'Error',
-      success: 'Success',
-    },
-    landing: {
-      title: 'AI Grant Assistant',
-      subtitle: 'Supporting civil society organizations in Germany and Ukraine in creating EU funding applications',
-      features: {
-        horizon: {
-          title: 'EU Horizon Europe',
-          description: 'Step-by-step guide for Horizon Europe applications',
-        },
-        ai: {
-          title: 'AI Support',
-          description: 'Intelligent suggestions and formulation assistance',
-        },
-        multilingual: {
-          title: 'Multilingual',
-          description: 'Available in German, Ukrainian, and English',
-        },
-        privacy: {
-          title: 'Data Protection',
-          description: 'Your data remains secure and confidential',
-        },
-      },
-      cta: {
-        start: 'Create Application Now',
-        noRegistration: 'No registration required - start immediately!',
-      },
-      example: {
-        title: 'Example EU Horizon Application',
-        projectName: 'Project: "Digital Bridges for Civil Society"',
-        description: 'A cooperation project between German and Ukrainian NGOs to develop digital tools for civic engagement.',
-      },
-    },
-    chat: {
-      assistant: 'AI Assistant',
-      you: 'You',
-      placeholder: 'Write your message...',
-      quickActions: {
-        help: 'Help',
-        example: 'Show Example',
-        skip: 'Skip',
-        review: 'Review',
-      },
-    },
-    steps: {
-      introduction: {
-        title: 'Basics',
-        description: 'Organization & Project',
-      },
-      excellence: {
-        title: 'Excellence',
-        description: 'Objectives & Methodology',
-      },
-      impact: {
-        title: 'Impact',
-        description: 'Effects & Dissemination',
-      },
-      implementation: {
-        title: 'Implementation',
-        description: 'Work Plan & Resources',
-      },
-      review: {
-        title: 'Review',
-        description: 'Final Check',
-      },
-    },
-  },
+  uk: translationsUk,
+  en: translationsEn,
 };
 
 export type Language = keyof typeof translations;
@@ -244,4 +244,32 @@ export function getTranslation(lang: Language, key: string): string {
   }
   
   return value || key;
+}
+
+export function interpolate(text: string, params: Record<string, any>): string {
+  return text.replace(/\{\{(\w+)\}\}/g, (match, key) => {
+    return params[key] !== undefined ? String(params[key]) : match;
+  });
+}
+
+export function getAvailableLanguages(): Language[] {
+  return Object.keys(translations) as Language[];
+}
+
+export function getLanguageName(lang: Language): string {
+  const names = {
+    de: 'Deutsch',
+    uk: 'Українська',
+    en: 'English',
+  };
+  return names[lang] || lang;
+}
+
+export function getLanguageFlag(lang: Language): string {
+  const flags = {
+    de: '🇩🇪',
+    uk: '🇺🇦',
+    en: '🇬🇧',
+  };
+  return flags[lang] || '🌐';
 }

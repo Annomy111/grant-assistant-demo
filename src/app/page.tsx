@@ -2,118 +2,553 @@
 
 import { useState } from 'react';
 import { ChatInterface } from '@/components/chat/ChatInterface';
-import { FileText, Users, Globe, Shield } from 'lucide-react';
+import { FileText, Users, Globe, Shield, ArrowRight, CheckCircle, Target, Award, Briefcase, Calendar } from 'lucide-react';
+import { brandConfig } from '@/lib/brand-config';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Home() {
   const [showChat, setShowChat] = useState(false);
   const [currentStep, setCurrentStep] = useState('introduction');
+  const { language, setLanguage, t } = useLanguage();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ backgroundColor: '#FFFFFF' }}>
       {!showChat ? (
-        <div className="container mx-auto px-4 py-8">
-          {/* Header */}
-          <header className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">
-              KI-Antragsassistent
-            </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Unterstützung für zivilgesellschaftliche Organisationen in Deutschland und der Ukraine bei der Erstellung von EU-Förderanträgen
-            </p>
-          </header>
-
-          {/* Features */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <FeatureCard
-              icon={<FileText className="w-8 h-8" />}
-              title="EU Horizon Europe"
-              description="Schritt-für-Schritt Anleitung für Horizon Europe Anträge"
-            />
-            <FeatureCard
-              icon={<Users className="w-8 h-8" />}
-              title="KI-Unterstützung"
-              description="Intelligente Vorschläge und Formulierungshilfen"
-            />
-            <FeatureCard
-              icon={<Globe className="w-8 h-8" />}
-              title="Mehrsprachig"
-              description="Verfügbar in Deutsch, Ukrainisch und Englisch"
-            />
-            <FeatureCard
-              icon={<Shield className="w-8 h-8" />}
-              title="Datenschutz"
-              description="Ihre Daten bleiben sicher und vertraulich"
-            />
-          </div>
-
-          {/* Sample Project Walk-through */}
-          <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              Beispielhafter EU Horizon Antrag
-            </h2>
-            <div className="prose max-w-none text-gray-600">
-              <h3 className="text-lg font-semibold mt-4 mb-2">
-                Projekt: "Digital Bridges for Civil Society"
-              </h3>
-              <p className="mb-4">
-                Ein Kooperationsprojekt zwischen deutschen und ukrainischen NGOs zur Entwicklung 
-                digitaler Werkzeuge für zivilgesellschaftliches Engagement.
-              </p>
-              
-              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
-                <h4 className="font-semibold mb-2">Excellence (Exzellenz)</h4>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>Innovative digitale Plattform für grenzüberschreitende Zusammenarbeit</li>
-                  <li>Neue Methoden für virtuelle Partizipation und Engagement</li>
-                  <li>Integration von KI für automatische Übersetzung und kulturelle Anpassung</li>
-                </ul>
+        <div>
+          {/* German-Ukrainian Bureau Header Bar */}
+          <header className="w-full py-6 px-8" style={{ backgroundColor: '#304945' }}>
+            <div className="max-w-7xl mx-auto flex items-center justify-between">
+              <div className="flex items-center">
+                <img 
+                  src="/dub-logo.jpg" 
+                  alt="German-Ukrainian Bureau Logo" 
+                  width={120} 
+                  height={150}
+                  style={{ objectFit: 'contain' }}
+                />
+                <div className="ml-6">
+                <h1 className="text-white font-bold tracking-wider" style={{ 
+                  fontFamily: 'Open Sans, sans-serif',
+                  fontSize: '1.75rem',
+                  letterSpacing: '0.13em',
+                  marginBottom: '0.25rem'
+                }}>
+                  {t('landing.title')}
+                </h1>
+                <p className="text-white" style={{ 
+                  fontFamily: 'Inter, sans-serif',
+                  fontSize: '1rem',
+                  letterSpacing: '0.05em',
+                  opacity: 0.9
+                }}>
+                  {t('landing.subtitle')}
+                </p>
+                </div>
               </div>
-
-              <div className="bg-green-50 border-l-4 border-green-500 p-4 mb-4">
-                <h4 className="font-semibold mb-2">Impact (Wirkung)</h4>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>Stärkung von 50+ Organisationen in beiden Ländern</li>
-                  <li>Erreichen von 10.000+ Bürgern durch digitale Teilhabe</li>
-                  <li>Nachhaltige Partnerschaften und Wissenstransfer</li>
-                </ul>
-              </div>
-
-              <div className="bg-purple-50 border-l-4 border-purple-500 p-4 mb-4">
-                <h4 className="font-semibold mb-2">Implementation (Umsetzung)</h4>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>24 Monate Projektlaufzeit mit 6 Arbeitspaketen</li>
-                  <li>Konsortium aus 5 Partnern (3 DE, 2 UA)</li>
-                  <li>Budget: 1,5 Millionen EUR</li>
-                </ul>
+              {/* Language Switcher */}
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setLanguage('de')}
+                  className={`px-3 py-1 rounded text-sm font-medium transition-all ${
+                    language === 'de' 
+                      ? 'bg-white text-gray-800' 
+                      : 'bg-transparent text-white border border-white hover:bg-white hover:bg-opacity-10'
+                  }`}
+                >
+                  DE
+                </button>
+                <button
+                  onClick={() => setLanguage('uk')}
+                  className={`px-3 py-1 rounded text-sm font-medium transition-all ${
+                    language === 'uk' 
+                      ? 'bg-white text-gray-800' 
+                      : 'bg-transparent text-white border border-white hover:bg-white hover:bg-opacity-10'
+                  }`}
+                >
+                  UK
+                </button>
+                <button
+                  onClick={() => setLanguage('en')}
+                  className={`px-3 py-1 rounded text-sm font-medium transition-all ${
+                    language === 'en' 
+                      ? 'bg-white text-gray-800' 
+                      : 'bg-transparent text-white border border-white hover:bg-white hover:bg-opacity-10'
+                  }`}
+                >
+                  EN
+                </button>
               </div>
             </div>
-          </div>
+          </header>
+          
+          <div className="max-w-6xl mx-auto px-6 py-16">
+            {/* Hero Section */}
+            <div className="mb-20">
+              <h2 className="text-4xl font-light mb-6" style={{ color: brandConfig.colors.primary }}>
+                {t('landing.heroTitle')}
+              </h2>
+              <p className="text-xl font-light leading-relaxed max-w-3xl" style={{ color: '#666' }}>
+                {t('landing.heroSubtitle')}
+              </p>
+              <div className="mt-8 flex gap-4">
+                <button
+                  onClick={() => {
+                    console.log('Button clicked, setting showChat to true');
+                    setShowChat(true);
+                  }}
+                  className="px-8 py-3 text-white font-medium rounded-sm hover:opacity-90 transition-opacity"
+                  style={{ backgroundColor: brandConfig.colors.primary }}
+                >
+                  {t('landing.startButton')}
+                </button>
+                <button className="px-8 py-3 border font-medium rounded-sm hover:bg-gray-50 transition-colors"
+                  style={{ borderColor: brandConfig.colors.primary, color: brandConfig.colors.primary }}>
+                  {t('landing.learnMore')}
+                </button>
+              </div>
+            </div>
 
-          {/* CTA */}
-          <div className="text-center">
-            <button
-              onClick={() => setShowChat(true)}
-              className="bg-blue-500 hover:bg-blue-600 text-white text-lg font-semibold px-8 py-4 rounded-lg shadow-lg transition-colors"
-            >
-              Jetzt Antrag erstellen
-            </button>
-            <p className="mt-4 text-gray-600">
-              Keine Registrierung erforderlich - starten Sie direkt!
-            </p>
+            {/* Horizon Europe Information */}
+            <div className="mb-20">
+              <h3 className="text-2xl font-light mb-8" style={{ color: brandConfig.colors.primary }}>
+                {t('horizonInfo.title')}
+              </h3>
+              <div className="grid md:grid-cols-3 gap-8">
+                <div>
+                  <p className="text-3xl font-light mb-2" style={{ color: brandConfig.colors.primary }}>€438 Mio</p>
+                  <p className="text-sm text-gray-600">{t('horizonInfo.budget.description')}</p>
+                </div>
+                <div>
+                  <p className="text-3xl font-light mb-2" style={{ color: brandConfig.colors.primary }}>100%</p>
+                  <p className="text-sm text-gray-600">{t('horizonInfo.funding.description')}</p>
+                </div>
+                <div>
+                  <p className="text-3xl font-light mb-2" style={{ color: brandConfig.colors.primary }}>€2-5 Mio</p>
+                  <p className="text-sm text-gray-600">{t('horizonInfo.typical.description')}</p>
+                </div>
+              </div>
+              
+              <div className="mt-12 space-y-6">
+                <div className="flex items-start gap-4">
+                  <Target className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                  <div>
+                    <h4 className="font-medium mb-1">{t('horizonInfo.pillar1.title')}</h4>
+                    <p className="text-sm text-gray-600">
+                      {t('horizonInfo.pillar1.description')}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <Globe className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                  <div>
+                    <h4 className="font-medium mb-1">{t('horizonInfo.pillar2.title')}</h4>
+                    <p className="text-sm text-gray-600">
+                      {t('horizonInfo.pillar2.description')}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <Award className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                  <div>
+                    <h4 className="font-medium mb-1">{t('horizonInfo.pillar3.title')}</h4>
+                    <p className="text-sm text-gray-600">
+                      {t('horizonInfo.pillar3.description')}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* How We Help Section */}
+            <div className="mb-20">
+              <h3 className="text-2xl font-light mb-8" style={{ color: brandConfig.colors.primary }}>
+                {t('process.title')}
+              </h3>
+              <div className="space-y-8">
+                <div className="flex gap-6">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center"
+                    style={{ backgroundColor: 'rgba(48, 73, 69, 0.1)' }}>
+                    <span className="font-semibold" style={{ color: brandConfig.colors.primary }}>1</span>
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-medium mb-2">{t('process.step1.title')}</h4>
+                    <p className="text-sm text-gray-600">
+                      {t('process.step1.description')}
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-6">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center"
+                    style={{ backgroundColor: 'rgba(48, 73, 69, 0.1)' }}>
+                    <span className="font-semibold" style={{ color: brandConfig.colors.primary }}>2</span>
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-medium mb-2">{t('process.step2.title')}</h4>
+                    <p className="text-sm text-gray-600">
+                      {t('process.step2.description')}
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-6">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center"
+                    style={{ backgroundColor: 'rgba(48, 73, 69, 0.1)' }}>
+                    <span className="font-semibold" style={{ color: brandConfig.colors.primary }}>3</span>
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-medium mb-2">{t('process.step3.title')}</h4>
+                    <p className="text-sm text-gray-600">
+                      {t('process.step3.description')}
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-6">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center"
+                    style={{ backgroundColor: 'rgba(48, 73, 69, 0.1)' }}>
+                    <span className="font-semibold" style={{ color: brandConfig.colors.primary }}>4</span>
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-medium mb-2">{t('process.step4.title')}</h4>
+                    <p className="text-sm text-gray-600">
+                      {t('process.step4.description')}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Ukraine-Specific Opportunities */}
+            <div className="mb-20 p-8 rounded" style={{ backgroundColor: 'rgba(48, 73, 69, 0.03)' }}>
+              <h3 className="text-2xl font-light mb-8" style={{ color: brandConfig.colors.primary }}>
+                🇺🇦 {t('ukraine.title')}
+              </h3>
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <h4 className="font-medium mb-3">{t('ukraine.horizon.title')}</h4>
+                  <ul className="space-y-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <span>{t('ukraine.horizon.item1')}</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <span>{t('ukraine.horizon.item2')}</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <span>{t('ukraine.horizon.item3')}</span>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-3">MSCA4Ukraine Status 2025</h4>
+                  <ul className="space-y-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2">
+                      <Award className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <span><strong>176 Forschende unterstützt:</strong> In 24 Gastländern (Stand: Q1 2025)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Award className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <span><strong>Management-Call offen:</strong> Bis 16.09.2025 für Verwaltungsorganisation</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Award className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <span><strong>Keine weiteren Fellowship-Calls:</strong> Aktuell keine neuen Ausschreibungen geplant</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="mt-6 p-4 bg-white rounded">
+                <p className="text-sm">
+                  <strong>Historischer Erfolg:</strong> Unter Horizon 2020 war Ukraine an 230 Projekten mit 
+                  323 Teilnehmern beteiligt (€45.5M Förderung) - besonders stark in MSCA, Energie und Klima.
+                </p>
+              </div>
+            </div>
+
+            {/* CERV Programme */}
+            <div className="mb-20">
+              <h3 className="text-2xl font-light mb-8" style={{ color: brandConfig.colors.primary }}>
+                CERV Programme – Ukraine seit 09.01.2024 assoziiert
+              </h3>
+              <p className="text-gray-600 mb-6">
+                <strong>NEU:</strong> Ukraine nimmt seit Januar 2024 am CERV-Programm teil. 
+                Zugang zu allen Bereichen außer "Union Values". Besonderer Fokus auf Kinder 
+                aus der Ukraine in der CERV-2025-CHILD Ausschreibung (29.04.2025 Deadline).
+              </p>
+              <div className="grid md:grid-cols-4 gap-6">
+                <div className="text-center">
+                  <div className="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center"
+                    style={{ backgroundColor: 'rgba(48, 73, 69, 0.1)' }}>
+                    <span className="text-lg">⚖️</span>
+                  </div>
+                  <h4 className="font-medium text-sm mb-1">Gleichheit & Rechte</h4>
+                  <p className="text-xs text-gray-600">Anti-Diskriminierung und Gleichstellung</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center"
+                    style={{ backgroundColor: 'rgba(48, 73, 69, 0.1)' }}>
+                    <span className="text-lg">🤝</span>
+                  </div>
+                  <h4 className="font-medium text-sm mb-1">Bürgerbeteiligung</h4>
+                  <p className="text-xs text-gray-600">Demokratische Partizipation</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center"
+                    style={{ backgroundColor: 'rgba(48, 73, 69, 0.1)' }}>
+                    <span className="text-lg">🛡️</span>
+                  </div>
+                  <h4 className="font-medium text-sm mb-1">Daphne</h4>
+                  <p className="text-xs text-gray-600">Gewaltprävention und Opferschutz</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center"
+                    style={{ backgroundColor: 'rgba(48, 73, 69, 0.1)' }}>
+                    <span className="text-lg">🌟</span>
+                  </div>
+                  <h4 className="font-medium text-sm mb-1">EU-Werte</h4>
+                  <p className="text-xs text-gray-600">Förderung gemeinsamer Werte</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Expertise Section */}
+            <div className="mb-20">
+              <h3 className="text-2xl font-light mb-8" style={{ color: brandConfig.colors.primary }}>
+                Unsere Expertise
+              </h3>
+              <div className="grid md:grid-cols-2 gap-12">
+                <div>
+                  <h4 className="font-medium mb-4">EU-Ukraine Kooperation</h4>
+                  <p className="text-sm text-gray-600 mb-4">
+                    Als Deutsch-Ukrainisches Büro verfügen wir über einzigartige Expertise in der 
+                    Förderung bilateraler Kooperationen. Wir kennen die regulatorischen Rahmenbedingungen 
+                    beider Länder und unterstützen Sie bei:
+                  </p>
+                  <ul className="space-y-2">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <span className="text-sm text-gray-600">Associated Country Status der Ukraine in Horizon Europe</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <span className="text-sm text-gray-600">Civil Society Facility Programme</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <span className="text-sm text-gray-600">ERASMUS+ Capacity Building</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h4 className="font-medium mb-4">Thematische Schwerpunkte</h4>
+                  <p className="text-sm text-gray-600 mb-4">
+                    Unsere Expertise erstreckt sich über verschiedene Horizon Europe Cluster 
+                    mit besonderem Fokus auf:
+                  </p>
+                  <ul className="space-y-2">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <span className="text-sm text-gray-600">Cluster 2: Culture, Creativity & Inclusive Society</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <span className="text-sm text-gray-600">Cluster 3: Civil Security for Society</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <span className="text-sm text-gray-600">Cluster 6: Food, Bioeconomy & Natural Resources</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+
+            {/* Upcoming Deadlines */}
+            <div className="mb-20">
+              <h3 className="text-2xl font-light mb-8" style={{ color: brandConfig.colors.primary }}>
+                Aktuelle Ausschreibungen 2025
+              </h3>
+              
+              <div className="mb-6 p-4 rounded" style={{ backgroundColor: 'rgba(48, 73, 69, 0.05)' }}>
+                <p className="text-sm mb-2">
+                  <strong>Wichtige Termine 2025:</strong>
+                </p>
+                <ul className="text-sm text-gray-600 space-y-1">
+                  <li>• 15. Mai 2025: Cluster 2 Calls öffnen & Info Day</li>
+                  <li>• 16. Mai 2025: Brokerage Event für Konsortiumsbildung</li>
+                  <li>• 16. September 2025: Deadline für alle Cluster 2 Calls (First Stage)</li>
+                  <li>• 17. März 2026: Second Stage Deadline für zweistufige Calls</li>
+                  <li>• November 2025: Erwartete Cluster 3 Calls mit UA-Verpflichtung</li>
+                </ul>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="flex items-center justify-between py-3 border-b border-gray-100">
+                  <div className="flex items-center gap-4">
+                    <Calendar className="w-5 h-5" style={{ color: brandConfig.colors.primary }} />
+                    <div>
+                      <p className="font-medium">HORIZON-CL2-2025-DEMOCRACY-01</p>
+                      <p className="text-sm text-gray-600">Counter disinformation & FIMI (€3-3.5M per project)</p>
+                    </div>
+                  </div>
+                  <span className="text-sm font-medium" style={{ color: brandConfig.colors.primary }}>
+                    Deadline: 16.09.2025
+                  </span>
+                </div>
+                
+                <div className="flex items-center justify-between py-3 border-b border-gray-100">
+                  <div className="flex items-center gap-4">
+                    <Calendar className="w-5 h-5" style={{ color: brandConfig.colors.primary }} />
+                    <div>
+                      <p className="font-medium">HORIZON-CL2-2025-DEMOCRACY-AUTOCRACY</p>
+                      <p className="text-sm text-gray-600">Understanding autocratic appeal (€10.5M total, nature & drivers research)</p>
+                    </div>
+                  </div>
+                  <span className="text-sm font-medium" style={{ color: brandConfig.colors.primary }}>
+                    Deadline: 16.09.2025
+                  </span>
+                </div>
+                
+                <div className="flex items-center justify-between py-3 border-b border-gray-100">
+                  <div className="flex items-center gap-4">
+                    <Calendar className="w-5 h-5" style={{ color: brandConfig.colors.primary }} />
+                    <div>
+                      <p className="font-medium">HORIZON-CL2-2025-HERITAGE</p>
+                      <p className="text-sm text-gray-600">Cultural Heritage topics (€82.5M total budget, €2.5-4M per project)</p>
+                    </div>
+                  </div>
+                  <span className="text-sm font-medium" style={{ color: brandConfig.colors.primary }}>
+                    Deadline: 16.09.2025
+                  </span>
+                </div>
+                
+                <div className="flex items-center justify-between py-3 border-b border-gray-100">
+                  <div className="flex items-center gap-4">
+                    <Calendar className="w-5 h-5" style={{ color: brandConfig.colors.primary }} />
+                    <div>
+                      <p className="font-medium">MSCA4Ukraine Management Call</p>
+                      <p className="text-sm text-gray-600">Organization to manage next phase (No new fellowships planned)</p>
+                    </div>
+                  </div>
+                  <span className="text-sm font-medium" style={{ color: brandConfig.colors.primary }}>
+                    Deadline: 16.09.2025
+                  </span>
+                </div>
+                
+                <div className="flex items-center justify-between py-3 border-b border-gray-100">
+                  <div className="flex items-center gap-4">
+                    <Calendar className="w-5 h-5" style={{ color: brandConfig.colors.primary }} />
+                    <div>
+                      <p className="font-medium">CERV-2025-CHILD</p>
+                      <p className="text-sm text-gray-600">Children's rights incl. Ukrainian refugees (Deadline: 29.04.2025)</p>
+                    </div>
+                  </div>
+                  <span className="text-sm font-medium" style={{ color: brandConfig.colors.primary }}>
+                    Expected: Nov 2025
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Features - Minimalist */}
+            <div className="mb-20">
+              <h3 className="text-2xl font-light mb-8" style={{ color: brandConfig.colors.primary }}>
+                Plattform Features
+              </h3>
+              <div className="grid md:grid-cols-4 gap-8">
+                <div className="text-center">
+                  <FileText className="w-8 h-8 mx-auto mb-3" style={{ color: brandConfig.colors.primary }} />
+                  <h4 className="font-medium mb-2 text-sm">Template Library</h4>
+                  <p className="text-xs text-gray-600">
+                    Vorgefertigte Templates für alle Horizon Europe Antragstypen
+                  </p>
+                </div>
+                <div className="text-center">
+                  <Users className="w-8 h-8 mx-auto mb-3" style={{ color: brandConfig.colors.primary }} />
+                  <h4 className="font-medium mb-2 text-sm">Partner Matching</h4>
+                  <p className="text-xs text-gray-600">
+                    Zugang zu unserem Netzwerk qualifizierter Projektpartner
+                  </p>
+                </div>
+                <div className="text-center">
+                  <Globe className="w-8 h-8 mx-auto mb-3" style={{ color: brandConfig.colors.primary }} />
+                  <h4 className="font-medium mb-2 text-sm">Multilingual</h4>
+                  <p className="text-xs text-gray-600">
+                    Verfügbar in Deutsch, Ukrainisch und Englisch
+                  </p>
+                </div>
+                <div className="text-center">
+                  <Shield className="w-8 h-8 mx-auto mb-3" style={{ color: brandConfig.colors.primary }} />
+                  <h4 className="font-medium mb-2 text-sm">GDPR Compliant</h4>
+                  <p className="text-xs text-gray-600">
+                    Vollständige Datenschutz-Compliance nach EU-Standards
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="text-center py-12">
+              <h3 className="text-2xl font-light mb-6" style={{ color: brandConfig.colors.primary }}>
+                Bereit für Ihren EU-Antrag?
+              </h3>
+              <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+                Nutzen Sie unsere KI-gestützte Plattform und die Expertise des Deutsch-Ukrainischen Büros 
+                für Ihren erfolgreichen EU-Förderantrag.
+              </p>
+              <button
+                onClick={() => {
+                  console.log('Bottom button clicked, setting showChat to true');
+                  setShowChat(true);
+                }}
+                className="px-12 py-4 text-white font-medium rounded-sm hover:opacity-90 transition-opacity inline-flex items-center gap-2"
+                style={{ backgroundColor: brandConfig.colors.primary }}
+              >
+                Jetzt Starten
+                <ArrowRight className="w-5 h-5" />
+              </button>
+              <p className="mt-4 text-sm text-gray-500">
+                Keine Registrierung erforderlich • Kostenlose Erstberatung
+              </p>
+            </div>
           </div>
         </div>
       ) : (
         <div className="h-screen flex flex-col">
-          <header className="bg-white border-b px-4 py-3 flex items-center justify-between">
-            <h1 className="text-xl font-semibold text-gray-800">
-              KI-Antragsassistent
-            </h1>
-            <button
-              onClick={() => setShowChat(false)}
-              className="text-gray-600 hover:text-gray-800"
-            >
-              Zurück zur Übersicht
-            </button>
+          <header className="w-full py-5 px-6" style={{ backgroundColor: '#304945' }}>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <img 
+                  src="/dub-logo.jpg" 
+                  alt="German-Ukrainian Bureau Logo" 
+                  width={100} 
+                  height={125}
+                  style={{ objectFit: 'contain' }}
+                />
+                <div className="ml-6">
+                  <h1 className="text-white font-bold" style={{ 
+                    fontFamily: 'Open Sans, sans-serif',
+                    fontSize: '1.5rem',
+                    letterSpacing: '0.1em'
+                  }}>
+                    {t('landing.title')}
+                  </h1>
+                  <p className="text-white opacity-90" style={{ fontSize: '0.95rem' }}>Grant Assistant</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowChat(false)}
+                className="text-white hover:opacity-80 transition-opacity px-4 py-2 border border-white rounded"
+              >
+                Zurück zur Übersicht
+              </button>
+            </div>
           </header>
           <div className="flex-1 overflow-hidden">
             <ChatInterface 
@@ -123,22 +558,6 @@ export default function Home() {
           </div>
         </div>
       )}
-    </div>
-  );
-}
-
-interface FeatureCardProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}
-
-function FeatureCard({ icon, title, description }: FeatureCardProps) {
-  return (
-    <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
-      <div className="text-blue-500 mb-4">{icon}</div>
-      <h3 className="text-lg font-semibold text-gray-800 mb-2">{title}</h3>
-      <p className="text-gray-600">{description}</p>
     </div>
   );
 }

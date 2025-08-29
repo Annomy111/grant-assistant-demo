@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   
   // Netlify specific configuration
   output: 'standalone',
+  outputFileTracingRoot: '/Users/winzendwyers/Desktop/untitled folder/grant-assistant',
   
   // Environment variables that should be available on the client
   env: {

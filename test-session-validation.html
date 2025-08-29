@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Session Validation Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1a1a1a;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #374151;
+            margin-top: 30px;
+        }
+        .test-section {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #e5e7eb;
+        }
+        .test-input {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .test-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .test-input button {
+            padding: 10px 20px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .test-input button:hover {
+            background: #2563eb;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+        .result.success {
+            background: #d1fae5;
+            border: 1px solid #10b981;
+            color: #065f46;
+        }
+        .result.error {
+            background: #fee2e2;
+            border: 1px solid #ef4444;
+            color: #991b1b;
+        }
+        .result.warning {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            color: #92400e;
+        }
+        pre {
+            background: #1f2937;
+            color: #f3f4f6;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 2px;
+        }
+        .badge.valid {
+            background: #10b981;
+            color: white;
+        }
+        .badge.invalid {
+            background: #ef4444;
+            color: white;
+        }
+        .badge.generic {
+            background: #f59e0b;
+            color: white;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1f2937;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Session Validation Testing Suite</h1>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Session Status</div>
+                <div class="stat-value" id="session-status">-</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Invalid Attempts</div>
+                <div class="stat-value" id="invalid-attempts">0</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Storage Type</div>
+                <div class="stat-value" id="storage-type">-</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Context Fields</div>
+                <div class="stat-value" id="context-fields">0</div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🧪 Test Validation</h2>
+            
+            <div class="test-input">
+                <input type="text" id="org-input" placeholder="Enter organization name...">
+                <button onclick="testOrganization()">Test Organization</button>
+            </div>
+            <div id="org-result"></div>
+            
+            <div class="test-input">
+                <input type="text" id="project-input" placeholder="Enter project title...">
+                <button onclick="testProject()">Test Project</button>
+            </div>
+            <div id="project-result"></div>
+            
+            <div class="test-input">
+                <input type="text" id="call-input" placeholder="Enter call identifier...">
+                <button onclick="testCall()">Test Call</button>
+            </div>
+            <div id="call-result"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🚫 Test Generic Phrases</h2>
+            <p>These should all be rejected:</p>
+            <div id="generic-tests"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>📊 Current Session Data</h2>
+            <button onclick="refreshSession()">Refresh</button>
+            <button onclick="clearSession()">Clear Session</button>
+            <button onclick="exportSession()">Export Session</button>
+            <pre id="session-data">Loading...</pre>
+        </div>
+        
+        <div class="test-section">
+            <h2>🔄 Migration Test</h2>
+            <button onclick="createOldData()">Create Old localStorage Data</button>
+            <button onclick="testMigration()">Test Migration</button>
+            <div id="migration-result"></div>
+        </div>
+    </div>
+    
+    <script type="module">
+        // Import validation classes (simulated)
+        const BLACKLISTED_PHRASES = [
+            'legen wir los', 'los gehts', 'los', 'weiter', 'ok', 'gut', 'sehr gut',
+            'continue', 'next', 'please', 'yes', 'no', 'test', 'demo'
+        ];
+        
+        class MockValidator {
+            isGenericPhrase(value) {
+                const normalized = value.toLowerCase().trim();
+                return BLACKLISTED_PHRASES.includes(normalized) || normalized.length < 3;
+            }
+            
+            validate(field, value) {
+                if (!value || this.isGenericPhrase(value)) {
+                    return { isValid: false, reason: 'Generic or invalid phrase' };
+                }
+                
+                if (field === 'organizationName' && value.length < 3) {
+                    return { isValid: false, reason: 'Too short' };
+                }
+                
+                if (field === 'projectTitle' && value.split(' ').length < 2) {
+                    return { isValid: false, reason: 'Must contain at least 2 words' };
+                }
+                
+                if (field === 'call' && !(/[A-Z0-9-]/.test(value))) {
+                    return { isValid: false, reason: 'Invalid call format' };
+                }
+                
+                return { isValid: true, sanitizedValue: value.trim() };
+            }
+        }
+        
+        const validator = new MockValidator();
+        
+        window.testOrganization = function() {
+            const value = document.getElementById('org-input').value;
+            const result = validator.validate('organizationName', value);
+            showResult('org-result', value, result);
+            
+            if (result.isValid) {
+                updateLocalStorage('organizationName', result.sanitizedValue);
+            }
+        }
+        
+        window.testProject = function() {
+            const value = document.getElementById('project-input').value;
+            const result = validator.validate('projectTitle', value);
+            showResult('project-result', value, result);
+            
+            if (result.isValid) {
+                updateLocalStorage('projectTitle', result.sanitizedValue);
+            }
+        }
+        
+        window.testCall = function() {
+            const value = document.getElementById('call-input').value;
+            const result = validator.validate('call', value);
+            showResult('call-result', value, result);
+            
+            if (result.isValid) {
+                updateLocalStorage('call', result.sanitizedValue);
+            }
+        }
+        
+        function showResult(elementId, value, result) {
+            const elem = document.getElementById(elementId);
+            if (result.isValid) {
+                elem.className = 'result success';
+                elem.innerHTML = `✅ Valid: "${result.sanitizedValue}"`;
+            } else {
+                elem.className = 'result error';
+                elem.innerHTML = `❌ Invalid: "${value}" - ${result.reason}`;
+            }
+            refreshSession();
+        }
+        
+        function updateLocalStorage(field, value) {
+            const context = JSON.parse(localStorage.getItem('grant-application-context') || '{}');
+            context[field] = value;
+            localStorage.setItem('grant-application-context', JSON.stringify(context));
+        }
+        
+        window.refreshSession = function() {
+            const context = localStorage.getItem('grant-application-context');
+            const session = localStorage.getItem('grant_session_current');
+            
+            document.getElementById('session-data').textContent = JSON.stringify({
+                context: context ? JSON.parse(context) : null,
+                session: session ? JSON.parse(session) : null
+            }, null, 2);
+            
+            // Update stats
+            const contextObj = context ? JSON.parse(context) : {};
+            document.getElementById('context-fields').textContent = Object.keys(contextObj).length;
+            document.getElementById('session-status').textContent = session ? 'Active' : 'None';
+            document.getElementById('storage-type').textContent = window.indexedDB ? 'IndexedDB' : 'LocalStorage';
+        }
+        
+        window.clearSession = function() {
+            localStorage.removeItem('grant-application-context');
+            localStorage.removeItem('grant_session_current');
+            localStorage.removeItem('grant-assistant-state');
+            refreshSession();
+            alert('Session cleared!');
+        }
+        
+        window.exportSession = function() {
+            const data = {
+                context: JSON.parse(localStorage.getItem('grant-application-context') || '{}'),
+                session: JSON.parse(localStorage.getItem('grant_session_current') || '{}'),
+                timestamp: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `session-export-${Date.now()}.json`;
+            a.click();
+        }
+        
+        window.createOldData = function() {
+            // Create old format data
+            const oldContext = {
+                organizationName: 'Legen wir los', // Bad data
+                projectTitle: 'Test Project',
+                call: 'HORIZON-CL2-2025-DEMOCRACY-01'
+            };
+            
+            localStorage.setItem('grant-application-context', JSON.stringify(oldContext));
+            document.getElementById('migration-result').className = 'result warning';
+            document.getElementById('migration-result').innerHTML = '⚠️ Created old data with invalid organization name';
+            refreshSession();
+        }
+        
+        window.testMigration = function() {
+            // Simulate migration
+            const oldContext = JSON.parse(localStorage.getItem('grant-application-context') || '{}');
+            const migrated = {};
+            let invalidCount = 0;
+            
+            for (const [field, value] of Object.entries(oldContext)) {
+                const validation = validator.validate(field, value);
+                if (validation.isValid) {
+                    migrated[field] = validation.sanitizedValue;
+                } else {
+                    invalidCount++;
+                    console.log(`Rejected ${field}: ${value}`);
+                }
+            }
+            
+            localStorage.setItem('grant-application-context', JSON.stringify(migrated));
+            
+            document.getElementById('migration-result').className = 'result success';
+            document.getElementById('migration-result').innerHTML = 
+                `✅ Migration complete: ${Object.keys(migrated).length} valid fields, ${invalidCount} rejected`;
+            refreshSession();
+        }
+        
+        // Test generic phrases
+        function testGenericPhrases() {
+            const genericTests = [
+                'Legen wir los',
+                'los gehts',
+                'weiter',
+                'ok',
+                'test',
+                'continue',
+                '...',
+                'a',
+                'Open Society Foundations' // This should be valid
+            ];
+            
+            const container = document.getElementById('generic-tests');
+            container.innerHTML = '';
+            
+            genericTests.forEach(test => {
+                const result = validator.validate('organizationName', test);
+                const badge = document.createElement('span');
+                badge.className = `badge ${result.isValid ? 'valid' : 'invalid'}`;
+                badge.textContent = `"${test}" ${result.isValid ? '✓' : '✗'}`;
+                container.appendChild(badge);
+            });
+        }
+        
+        // Initialize
+        refreshSession();
+        testGenericPhrases();
+        
+        // Auto-refresh every 2 seconds
+        setInterval(refreshSession, 2000);
+    </script>
+</body>
+</html>

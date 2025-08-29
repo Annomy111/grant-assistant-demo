@@ -55,16 +55,18 @@ export function ExportDialog({ isOpen, onClose, applicationData }: ExportDialogP
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold">
+          <h2 className="text-xl font-semibold" style={{ color: '#304945' }}>
             {language === 'de' ? 'Dokument exportieren' : 
              language === 'uk' ? 'Експортувати документ' : 
              'Export Document'}
           </h2>
           <button
             onClick={onClose}
-            className="p-1 hover:bg-gray-100 rounded"
+            className="p-1 rounded transition-colors"
+            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(48, 73, 69, 0.1)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; }}
           >
-            <X className="w-5 h-5" />
+            <X className="w-5 h-5" style={{ color: '#304945' }} />
           </button>
         </div>
         
@@ -78,12 +80,15 @@ export function ExportDialog({ isOpen, onClose, applicationData }: ExportDialogP
           <button
             onClick={() => handleExport('pdf')}
             disabled={isExporting}
-            className="w-full flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 disabled:opacity-50"
+            className="w-full flex items-center justify-between p-4 border rounded-lg transition-colors disabled:opacity-50"
+            style={{ borderColor: 'rgba(48, 73, 69, 0.2)' }}
+            onMouseEnter={(e) => { if (!isExporting) e.currentTarget.style.backgroundColor = 'rgba(48, 73, 69, 0.05)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; }}
           >
             <div className="flex items-center gap-3">
-              <FileText className="w-6 h-6 text-red-500" />
+              <FileText className="w-6 h-6" style={{ color: 'rgba(48, 73, 69, 0.8)' }} />
               <div className="text-left">
-                <p className="font-medium">PDF</p>
+                <p className="font-medium" style={{ color: '#304945' }}>PDF</p>
                 <p className="text-sm text-gray-500">
                   {language === 'de' ? 'Für Druck und Archivierung' : 
                    language === 'uk' ? 'Для друку та архівування' : 
@@ -91,18 +96,21 @@ export function ExportDialog({ isOpen, onClose, applicationData }: ExportDialogP
                 </p>
               </div>
             </div>
-            <Download className="w-5 h-5 text-gray-400" />
+            <Download className="w-5 h-5" style={{ color: 'rgba(48, 73, 69, 0.5)' }} />
           </button>
           
           <button
             onClick={() => handleExport('word')}
             disabled={isExporting}
-            className="w-full flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 disabled:opacity-50"
+            className="w-full flex items-center justify-between p-4 border rounded-lg transition-colors disabled:opacity-50"
+            style={{ borderColor: 'rgba(48, 73, 69, 0.2)' }}
+            onMouseEnter={(e) => { if (!isExporting) e.currentTarget.style.backgroundColor = 'rgba(48, 73, 69, 0.05)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; }}
           >
             <div className="flex items-center gap-3">
-              <FileText className="w-6 h-6 text-blue-500" />
+              <FileText className="w-6 h-6" style={{ color: '#304945' }} />
               <div className="text-left">
-                <p className="font-medium">Word (DOCX)</p>
+                <p className="font-medium" style={{ color: '#304945' }}>Word (DOCX)</p>
                 <p className="text-sm text-gray-500">
                   {language === 'de' ? 'Für weitere Bearbeitung' : 
                    language === 'uk' ? 'Для подальшого редагування' : 
@@ -110,7 +118,7 @@ export function ExportDialog({ isOpen, onClose, applicationData }: ExportDialogP
                 </p>
               </div>
             </div>
-            <Download className="w-5 h-5 text-gray-400" />
+            <Download className="w-5 h-5" style={{ color: 'rgba(48, 73, 69, 0.5)' }} />
           </button>
         </div>
         

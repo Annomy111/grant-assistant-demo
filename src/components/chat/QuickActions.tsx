@@ -1,36 +1,40 @@
 'use client';
 
-import { HelpCircle, FileText, SkipForward, CheckCircle } from 'lucide-react';
+import { HelpCircle, FileText, SkipForward, CheckCircle, Sparkles } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface QuickActionsProps {
   onAction: (action: string) => void;
 }
 
 export function QuickActions({ onAction }: QuickActionsProps) {
+  const { t } = useLanguage();
+  
   const actions = [
     {
-      id: 'help',
-      label: 'Hilfe',
-      icon: HelpCircle,
-      color: 'text-blue-600 hover:bg-blue-50',
+      id: 'use_template',
+      label: `✨ ${t('quickActions.templates')}`,
+      icon: Sparkles,
     },
     {
-      id: 'example',
-      label: 'Beispiel zeigen',
+      id: 'cluster2_may',
+      label: t('quickActions.cluster2'),
       icon: FileText,
-      color: 'text-green-600 hover:bg-green-50',
     },
     {
-      id: 'skip',
-      label: 'Überspringen',
-      icon: SkipForward,
-      color: 'text-orange-600 hover:bg-orange-50',
-    },
-    {
-      id: 'review',
-      label: 'Überprüfen',
+      id: 'cerv_ukraine',
+      label: t('quickActions.cervUkraine'),
       icon: CheckCircle,
-      color: 'text-purple-600 hover:bg-purple-50',
+    },
+    {
+      id: 'ua_mandatory',
+      label: t('quickActions.uaMandatory'),
+      icon: HelpCircle,
+    },
+    {
+      id: 'two_stage',
+      label: t('quickActions.twoStage'),
+      icon: SkipForward,
     },
   ];
   
@@ -42,11 +46,20 @@ export function QuickActions({ onAction }: QuickActionsProps) {
           <button
             key={action.id}
             onClick={() => onAction(action.id)}
-            className={`
-              flex items-center gap-2 px-3 py-1.5 rounded-full
-              border text-sm whitespace-nowrap transition-colors
-              ${action.color}
-            `}
+            className="flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm whitespace-nowrap transition-all"
+            style={{
+              borderColor: 'rgba(48, 73, 69, 0.3)',
+              color: '#304945',
+              backgroundColor: 'transparent'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgba(48, 73, 69, 0.05)';
+              e.currentTarget.style.borderColor = 'rgba(48, 73, 69, 0.5)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+              e.currentTarget.style.borderColor = 'rgba(48, 73, 69, 0.3)';
+            }}
           >
             <Icon className="w-4 h-4" />
             <span>{action.label}</span>

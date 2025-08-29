@@ -3,6 +3,7 @@
 import { useState, KeyboardEvent } from 'react';
 import { Send, Paperclip, Mic } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ChatInputProps {
   onSend: (message: string) => void;
@@ -13,8 +14,9 @@ interface ChatInputProps {
 export function ChatInput({ 
   onSend, 
   disabled = false,
-  placeholder = 'Schreiben Sie Ihre Nachricht...'
+  placeholder
 }: ChatInputProps) {
+  const { t } = useLanguage();
   const [input, setInput] = useState('');
   
   const handleSend = () => {
@@ -38,15 +40,21 @@ export function ChatInput({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder={placeholder}
+          placeholder={placeholder || t('chat.inputPlaceholder')}
           disabled={disabled}
           rows={1}
           className={cn(
             'w-full px-4 py-3 pr-12 rounded-lg border resize-none',
-            'focus:outline-none focus:ring-2 focus:ring-blue-500',
+            'focus:outline-none focus:ring-2',
             'placeholder-gray-400',
             disabled && 'opacity-50 cursor-not-allowed'
           )}
+          onFocus={(e) => {
+            e.currentTarget.style.boxShadow = '0 0 0 2px rgba(48, 73, 69, 0.5)';
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.boxShadow = 'none';
+          }}
           style={{
             minHeight: '48px',
             maxHeight: '120px',
@@ -56,7 +64,7 @@ export function ChatInput({
         <button
           type="button"
           className="absolute right-2 bottom-3 p-1 text-gray-400 hover:text-gray-600"
-          title="Datei anhängen"
+          title={t('chat.attachFile')}
         >
           <Paperclip className="w-5 h-5" />
         </button>
@@ -66,11 +74,22 @@ export function ChatInput({
         onClick={handleSend}
         disabled={disabled || !input.trim()}
         className={cn(
-          'p-3 rounded-lg transition-colors',
-          'bg-blue-500 text-white',
-          'hover:bg-blue-600',
+          'p-3 rounded-lg transition-colors text-white',
           'disabled:opacity-50 disabled:cursor-not-allowed'
         )}
+        style={{ 
+          backgroundColor: disabled || !input.trim() ? 'rgba(48, 73, 69, 0.4)' : '#304945'
+        }}
+        onMouseEnter={(e) => {
+          if (!disabled && input.trim()) {
+            e.currentTarget.style.backgroundColor = 'rgba(48, 73, 69, 0.85)';
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (!disabled && input.trim()) {
+            e.currentTarget.style.backgroundColor = '#304945';
+          }
+        }}
       >
         <Send className="w-5 h-5" />
       </button>
@@ -81,7 +100,7 @@ export function ChatInput({
           'bg-gray-100 text-gray-600',
           'hover:bg-gray-200'
         )}
-        title="Spracheingabe"
+        title={t('chat.voiceInput')}
       >
         <Mic className="w-5 h-5" />
       </button>

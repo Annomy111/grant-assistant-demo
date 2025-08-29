@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear Bad Context</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .success {
+            background: #10b981;
+            color: white;
+        }
+        .danger {
+            background: #ef4444;
+            color: white;
+        }
+        pre {
+            background: #f3f4f6;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Grant Assistant Context Manager</h1>
+    
+    <h2>Current Context:</h2>
+    <pre id="current-context">Loading...</pre>
+    
+    <h2>Current State:</h2>
+    <pre id="current-state">Loading...</pre>
+    
+    <h2>Actions:</h2>
+    <button onclick="clearBadContext()" class="danger">Clear Bad Context Data</button>
+    <button onclick="clearAll()" class="danger">Clear ALL Data</button>
+    <button onclick="showData()" class="success">Refresh Display</button>
+    
+    <div id="message"></div>
+    
+    <script>
+        function showData() {
+            const context = localStorage.getItem('grant-application-context');
+            const state = localStorage.getItem('grant-assistant-state');
+            
+            document.getElementById('current-context').textContent = 
+                context ? JSON.stringify(JSON.parse(context), null, 2) : 'No context stored';
+                
+            document.getElementById('current-state').textContent = 
+                state ? JSON.stringify(JSON.parse(state), null, 2).substring(0, 500) + '...' : 'No state stored';
+        }
+        
+        function clearBadContext() {
+            // Get current context
+            const contextStr = localStorage.getItem('grant-application-context');
+            if (contextStr) {
+                const context = JSON.parse(contextStr);
+                
+                // Check if organization name is a generic prompt
+                const badNames = ['Legen wir los', 'los gehts', 'los', 'weiter', 'ok', 'ja'];
+                if (context.organizationName && badNames.some(bad => 
+                    context.organizationName.toLowerCase().includes(bad.toLowerCase()))) {
+                    
+                    // Remove bad organization name
+                    delete context.organizationName;
+                    
+                    // Also check project title
+                    if (context.projectTitle && (
+                        context.projectTitle.includes('sehr gut') || 
+                        context.projectTitle.includes('machen wir so') ||
+                        context.projectTitle.includes('weiter'))) {
+                        delete context.projectTitle;
+                    }
+                    
+                    // Save cleaned context
+                    localStorage.setItem('grant-application-context', JSON.stringify(context));
+                    document.getElementById('message').innerHTML = 
+                        '<p style="color: green;">✓ Cleaned bad context data!</p>';
+                } else {
+                    document.getElementById('message').innerHTML = 
+                        '<p style="color: blue;">ℹ️ No bad data found in context</p>';
+                }
+            }
+            
+            showData();
+        }
+        
+        function clearAll() {
+            if (confirm('This will clear ALL saved data. Are you sure?')) {
+                localStorage.removeItem('grant-application-context');
+                localStorage.removeItem('grant-assistant-state');
+                localStorage.removeItem('grant-assistant-drafts');
+                document.getElementById('message').innerHTML = 
+                    '<p style="color: green;">✓ All data cleared!</p>';
+                showData();
+            }
+        }
+        
+        // Show data on load
+        showData();
+    </script>
+</body>
+</html>

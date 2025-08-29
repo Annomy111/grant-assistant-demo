@@ -15,8 +15,11 @@ export function LanguageSelector() {
   
   return (
     <div className="relative group">
-      <button className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white border hover:bg-gray-50 transition-colors">
-        <Globe className="w-4 h-4 text-gray-600" />
+      <button className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white border transition-colors"
+        style={{ borderColor: 'rgba(48, 73, 69, 0.2)' }}
+        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(48, 73, 69, 0.05)'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'white'; }}>
+        <Globe className="w-4 h-4" style={{ color: '#304945' }} />
         <span className="text-sm font-medium">
           {languages.find(l => l.code === language)?.flag} {language.toUpperCase()}
         </span>
@@ -27,10 +30,17 @@ export function LanguageSelector() {
           <button
             key={lang.code}
             onClick={() => setLanguage(lang.code)}
-            className={`
-              flex items-center gap-3 w-full px-4 py-2 text-left hover:bg-gray-50
-              ${language === lang.code ? 'bg-blue-50 text-blue-600' : ''}
-            `}
+            className="flex items-center gap-3 w-full px-4 py-2 text-left transition-colors"
+            style={{ 
+              backgroundColor: language === lang.code ? 'rgba(48, 73, 69, 0.1)' : 'transparent',
+              color: language === lang.code ? '#304945' : 'inherit'
+            }}
+            onMouseEnter={(e) => { 
+              if (language !== lang.code) e.currentTarget.style.backgroundColor = 'rgba(48, 73, 69, 0.05)';
+            }}
+            onMouseLeave={(e) => { 
+              if (language !== lang.code) e.currentTarget.style.backgroundColor = 'transparent';
+            }}
           >
             <span className="text-xl">{lang.flag}</span>
             <span className="text-sm">{lang.label}</span>
