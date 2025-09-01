@@ -19,14 +19,7 @@ export default function Home() {
           <header className="w-full py-6 px-8" style={{ backgroundColor: '#304945' }}>
             <div className="max-w-7xl mx-auto flex items-center justify-between">
               <div className="flex items-center">
-                <img 
-                  src="/dub-logo.jpg" 
-                  alt="German-Ukrainian Bureau Logo" 
-                  width={120} 
-                  height={150}
-                  style={{ objectFit: 'contain' }}
-                />
-                <div className="ml-6">
+                <div>
                 <h1 className="text-white font-bold tracking-wider" style={{ 
                   fontFamily: 'Open Sans, sans-serif',
                   fontSize: '1.75rem',
@@ -45,38 +38,53 @@ export default function Home() {
                 </p>
                 </div>
               </div>
-              {/* Language Switcher */}
-              <div className="flex gap-2">
-                <button
-                  onClick={() => setLanguage('de')}
-                  className={`px-3 py-1 rounded text-sm font-medium transition-all ${
-                    language === 'de' 
-                      ? 'bg-white text-gray-800' 
-                      : 'bg-transparent text-white border border-white hover:bg-white hover:bg-opacity-10'
-                  }`}
-                >
-                  DE
-                </button>
-                <button
-                  onClick={() => setLanguage('uk')}
-                  className={`px-3 py-1 rounded text-sm font-medium transition-all ${
-                    language === 'uk' 
-                      ? 'bg-white text-gray-800' 
-                      : 'bg-transparent text-white border border-white hover:bg-white hover:bg-opacity-10'
-                  }`}
-                >
-                  UK
-                </button>
-                <button
-                  onClick={() => setLanguage('en')}
-                  className={`px-3 py-1 rounded text-sm font-medium transition-all ${
-                    language === 'en' 
-                      ? 'bg-white text-gray-800' 
-                      : 'bg-transparent text-white border border-white hover:bg-white hover:bg-opacity-10'
-                  }`}
-                >
-                  EN
-                </button>
+              <div className="flex items-center gap-6">
+                {/* Language Switcher */}
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setLanguage('de')}
+                    className={`px-3 py-1 rounded text-sm font-medium transition-all ${
+                      language === 'de' 
+                        ? 'bg-white text-gray-800' 
+                        : 'bg-transparent text-white border border-white hover:bg-white hover:bg-opacity-10'
+                    }`}
+                  >
+                    DE
+                  </button>
+                  <button
+                    onClick={() => setLanguage('uk')}
+                    className={`px-3 py-1 rounded text-sm font-medium transition-all ${
+                      language === 'uk' 
+                        ? 'bg-white text-gray-800' 
+                        : 'bg-transparent text-white border border-white hover:bg-white hover:bg-opacity-10'
+                    }`}
+                  >
+                    UK
+                  </button>
+                  <button
+                    onClick={() => setLanguage('en')}
+                    className={`px-3 py-1 rounded text-sm font-medium transition-all ${
+                      language === 'en' 
+                        ? 'bg-white text-gray-800' 
+                        : 'bg-transparent text-white border border-white hover:bg-white hover:bg-opacity-10'
+                    }`}
+                  >
+                    EN
+                  </button>
+                </div>
+                {/* Logo - now on the right and bigger */}
+                <img 
+                  src="/dub-logo.jpg" 
+                  alt="German-Ukrainian Bureau Logo" 
+                  width={200} 
+                  height={250}
+                  className="ml-4"
+                  style={{ 
+                    objectFit: 'contain',
+                    filter: 'brightness(1.1) contrast(1.05)',
+                    maxHeight: '80px'
+                  }}
+                />
               </div>
             </div>
           </header>
