@@ -16,75 +16,74 @@ export default function Home() {
       {!showChat ? (
         <div>
           {/* German-Ukrainian Bureau Header Bar */}
-          <header className="w-full py-6 px-8" style={{ backgroundColor: '#304945' }}>
+          <header className="w-full py-4 px-8" style={{ backgroundColor: '#304945' }}>
             <div className="max-w-7xl mx-auto flex items-center justify-between">
-              <div className="flex items-center">
-                <div>
+              {/* Logo on the left - much bigger and prominent */}
+              <div className="flex-shrink-0">
+                <img 
+                  src="/dub-logo.jpg" 
+                  alt="German-Ukrainian Bureau Logo" 
+                  className="h-24 w-auto"
+                  style={{ 
+                    filter: 'brightness(1.2) contrast(1.1) saturate(1.1)',
+                    minWidth: '320px',
+                    objectFit: 'contain'
+                  }}
+                />
+              </div>
+              
+              {/* Title in center */}
+              <div className="flex-1 text-center px-8">
                 <h1 className="text-white font-bold tracking-wider" style={{ 
                   fontFamily: 'Open Sans, sans-serif',
-                  fontSize: '1.75rem',
-                  letterSpacing: '0.13em',
+                  fontSize: '1.875rem',
+                  letterSpacing: '0.15em',
                   marginBottom: '0.25rem'
                 }}>
                   {t('landing.title')}
                 </h1>
                 <p className="text-white" style={{ 
                   fontFamily: 'Inter, sans-serif',
-                  fontSize: '1rem',
+                  fontSize: '1.125rem',
                   letterSpacing: '0.05em',
-                  opacity: 0.9
+                  opacity: 0.95
                 }}>
                   {t('landing.subtitle')}
                 </p>
-                </div>
               </div>
-              <div className="flex items-center gap-6">
-                {/* Language Switcher */}
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => setLanguage('de')}
-                    className={`px-3 py-1 rounded text-sm font-medium transition-all ${
-                      language === 'de' 
-                        ? 'bg-white text-gray-800' 
-                        : 'bg-transparent text-white border border-white hover:bg-white hover:bg-opacity-10'
-                    }`}
-                  >
-                    DE
-                  </button>
-                  <button
-                    onClick={() => setLanguage('uk')}
-                    className={`px-3 py-1 rounded text-sm font-medium transition-all ${
-                      language === 'uk' 
-                        ? 'bg-white text-gray-800' 
-                        : 'bg-transparent text-white border border-white hover:bg-white hover:bg-opacity-10'
-                    }`}
-                  >
-                    UK
-                  </button>
-                  <button
-                    onClick={() => setLanguage('en')}
-                    className={`px-3 py-1 rounded text-sm font-medium transition-all ${
-                      language === 'en' 
-                        ? 'bg-white text-gray-800' 
-                        : 'bg-transparent text-white border border-white hover:bg-white hover:bg-opacity-10'
-                    }`}
-                  >
-                    EN
-                  </button>
-                </div>
-                {/* Logo - now on the right and bigger */}
-                <img 
-                  src="/dub-logo.jpg" 
-                  alt="German-Ukrainian Bureau Logo" 
-                  width={200} 
-                  height={250}
-                  className="ml-4"
-                  style={{ 
-                    objectFit: 'contain',
-                    filter: 'brightness(1.1) contrast(1.05)',
-                    maxHeight: '80px'
-                  }}
-                />
+              
+              {/* Language Switcher on the right */}
+              <div className="flex-shrink-0 flex gap-2">
+                <button
+                  onClick={() => setLanguage('de')}
+                  className={`px-4 py-2 rounded text-sm font-medium transition-all ${
+                    language === 'de' 
+                      ? 'bg-white text-gray-800' 
+                      : 'bg-transparent text-white border border-white hover:bg-white hover:bg-opacity-10'
+                  }`}
+                >
+                  DE
+                </button>
+                <button
+                  onClick={() => setLanguage('uk')}
+                  className={`px-4 py-2 rounded text-sm font-medium transition-all ${
+                    language === 'uk' 
+                      ? 'bg-white text-gray-800' 
+                      : 'bg-transparent text-white border border-white hover:bg-white hover:bg-opacity-10'
+                  }`}
+                >
+                  UK
+                </button>
+                <button
+                  onClick={() => setLanguage('en')}
+                  className={`px-4 py-2 rounded text-sm font-medium transition-all ${
+                    language === 'en' 
+                      ? 'bg-white text-gray-800' 
+                      : 'bg-transparent text-white border border-white hover:bg-white hover:bg-opacity-10'
+                  }`}
+                >
+                  EN
+                </button>
               </div>
             </div>
           </header>
