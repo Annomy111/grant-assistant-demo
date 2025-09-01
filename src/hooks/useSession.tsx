@@ -16,6 +16,8 @@ export interface UseSessionOptions {
   onValidationError?: (field: string, reason: string) => void;
 }
 
+export type SessionHandler = UseSessionReturn;
+
 export interface UseSessionReturn {
   session: Session | null;
   context: ApplicationContext;
@@ -153,7 +155,8 @@ export function useSession(options: UseSessionOptions = {}): UseSessionReturn {
         // Store unsubscribe for cleanup
         return unsubscribe;
       } catch (err) {
-        console.error('[useSession] Failed to sync with ApplicationContextManager:', err);
+        // This error is not critical to the user, but good for developers to know.
+        // console.warn('[useSession] Failed to sync with ApplicationContextManager:', err);
       }
     };
     
@@ -169,7 +172,6 @@ export function useSession(options: UseSessionOptions = {}): UseSessionReturn {
   // Action: Validate and store a field
   const validateAndStore = useCallback(async (field: string, value: any): Promise<boolean> => {
     if (!sessionManagerRef.current) {
-      console.error('[useSession] Session manager not initialized');
       return false;
     }
     
@@ -197,7 +199,7 @@ export function useSession(options: UseSessionOptions = {}): UseSessionReturn {
       
       return success;
     } catch (err) {
-      console.error(`[useSession] Failed to validate ${field}:`, err);
+      // The calling function will handle the error.
       return false;
     } finally {
       setIsValidating(false);
@@ -207,7 +209,6 @@ export function useSession(options: UseSessionOptions = {}): UseSessionReturn {
   // Action: Update multiple context fields
   const updateContext = useCallback(async (updates: Partial<ApplicationContext>): Promise<void> => {
     if (!sessionManagerRef.current) {
-      console.error('[useSession] Session manager not initialized');
       return;
     }
     
@@ -232,7 +233,7 @@ export function useSession(options: UseSessionOptions = {}): UseSessionReturn {
       await sessionManagerRef.current.clearInvalidData();
       setValidationErrors({});
     } catch (err) {
-      console.error('[useSession] Failed to clear invalid data:', err);
+      // Error is not critical for user
     }
   }, []);
   
@@ -246,7 +247,7 @@ export function useSession(options: UseSessionOptions = {}): UseSessionReturn {
       setValidationErrors({});
       setInvalidAttempts(0);
     } catch (err) {
-      console.error('[useSession] Failed to clear session:', err);
+      // Error is not critical for user
     }
   }, []);
   
@@ -273,7 +274,7 @@ export function useSession(options: UseSessionOptions = {}): UseSessionReturn {
       }
       return success;
     } catch (err) {
-      console.error('[useSession] Failed to import session:', err);
+      // Error is not critical for user
       return false;
     }
   }, []);

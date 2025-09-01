@@ -118,7 +118,6 @@ export class SessionManager {
     await this.saveSession();
     this.notifyListeners();
     
-    console.log('[SessionManager] New session created:', sessionId);
     return sessionId;
   }
   
@@ -146,7 +145,6 @@ export class SessionManager {
     
     // Check if we've exceeded invalid attempts
     if ((this.currentSession!.metadata.invalidAttempts || 0) >= this.config.maxInvalidAttempts) {
-      console.warn('[SessionManager] Too many invalid attempts, creating new session');
       await this.createSession();
     }
     
@@ -154,8 +152,6 @@ export class SessionManager {
     const validation = this.validator.validate(field, value);
     
     if (!validation.isValid) {
-      console.warn(`[SessionManager] Invalid ${field}:`, validation.reason);
-      
       // Increment invalid attempts
       if (this.currentSession) {
         this.currentSession.metadata.invalidAttempts = 
@@ -179,8 +175,6 @@ export class SessionManager {
       
       await this.saveSession();
       this.notifyListeners();
-      
-      console.log(`[SessionManager] Stored ${field}:`, validation.sanitizedValue || value);
     }
     
     return true;
@@ -222,7 +216,6 @@ export class SessionManager {
         validatedContext[field as keyof ApplicationContext] = validation.sanitizedValue || value;
       } else {
         hasInvalid = true;
-        console.log(`[SessionManager] Removing invalid ${field}:`, value);
       }
     }
     
@@ -275,7 +268,6 @@ export class SessionManager {
       
       return true;
     } catch (error) {
-      console.error('[SessionManager] Failed to import session:', error);
       return false;
     }
   }
@@ -341,7 +333,6 @@ export class SessionManager {
         // Clear invalid data on load
         await this.clearInvalidData();
         
-        console.log('[SessionManager] Loaded existing session:', this.currentSession.id);
         return;
       }
     }
@@ -373,7 +364,6 @@ export class SessionManager {
     for (const session of sessions) {
       if (new Date(session.expiresAt) < now) {
         await this.storage.remove(this.SESSION_KEY_PREFIX + session.id);
-        console.log('[SessionManager] Cleaned up expired session:', session.id);
       }
     }
   }
@@ -386,8 +376,6 @@ export class SessionManager {
     const oldState = localStorage.getItem('grant-assistant-state');
     
     if (oldContext || oldState) {
-      console.log('[SessionManager] Migrating old localStorage data...');
-      
       try {
         if (oldContext) {
           const context = JSON.parse(oldContext);
