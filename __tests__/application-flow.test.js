@@ -12,7 +12,7 @@ describe('Application Flow Tests', () => {
   beforeEach(async () => {
     // Navigate to landing page and start application
     await page.goto(TEST_URL, { waitUntil: 'networkidle2' });
-    const startButton = await waitForElement(page, 'button:has-text("Jetzt Antrag erstellen")');
+    const startButton = await waitForElement(page, "//button[contains(., 'Jetzt Antrag erstellen')]");
     await startButton.click();
     await page.waitForTimeout(2000);
   });

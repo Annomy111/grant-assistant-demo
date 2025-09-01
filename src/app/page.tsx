@@ -12,42 +12,27 @@ export default function Home() {
   const { language, setLanguage, t } = useLanguage();
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#FFFFFF' }}>
+    <div className="min-h-screen bg-white">
       {!showChat ? (
         <div>
           {/* German-Ukrainian Bureau Header Bar */}
-          <header className="w-full py-4 px-8" style={{ backgroundColor: '#304945' }}>
+          <header className="w-full py-4 px-8 bg-brand">
             <div className="max-w-7xl mx-auto flex items-center justify-between">
               {/* Logo on the left - much bigger and prominent */}
               <div className="flex-shrink-0">
                 <img 
                   src="/dub-logo.jpg" 
                   alt="German-Ukrainian Bureau Logo" 
-                  className="h-24 w-auto"
-                  style={{ 
-                    filter: 'brightness(1.2) contrast(1.1) saturate(1.1)',
-                    minWidth: '320px',
-                    objectFit: 'contain'
-                  }}
+                  className="h-24 w-auto object-contain min-w-[320px] [filter:brightness(1.2)_contrast(1.1)_saturate(1.1)]"
                 />
               </div>
               
               {/* Title in center */}
               <div className="flex-1 text-center px-8">
-                <h1 className="text-white font-bold tracking-wider" style={{ 
-                  fontFamily: 'Open Sans, sans-serif',
-                  fontSize: '1.875rem',
-                  letterSpacing: '0.15em',
-                  marginBottom: '0.25rem'
-                }}>
+                <h1 className="text-white font-bold tracking-wider font-sans text-[1.875rem] tracking-[0.15em] mb-1">
                   {t('landing.title')}
                 </h1>
-                <p className="text-white" style={{ 
-                  fontFamily: 'Inter, sans-serif',
-                  fontSize: '1.125rem',
-                  letterSpacing: '0.05em',
-                  opacity: 0.95
-                }}>
+                <p className="text-white font-body text-[1.125rem] tracking-[0.05em] opacity-95">
                   {t('landing.subtitle')}
                 </p>
               </div>
@@ -91,25 +76,22 @@ export default function Home() {
           <div className="max-w-6xl mx-auto px-6 py-16">
             {/* Hero Section */}
             <div className="mb-20">
-              <h2 className="text-4xl font-light mb-6" style={{ color: brandConfig.colors.primary }}>
+              <h2 className="text-4xl font-light mb-6 text-brand">
                 {t('landing.heroTitle')}
               </h2>
-              <p className="text-xl font-light leading-relaxed max-w-3xl" style={{ color: '#666' }}>
+              <p className="text-xl font-light leading-relaxed max-w-3xl text-gray-600">
                 {t('landing.heroSubtitle')}
               </p>
               <div className="mt-8 flex gap-4">
                 <button
                   onClick={() => {
-                    console.log('Button clicked, setting showChat to true');
                     setShowChat(true);
                   }}
-                  className="px-8 py-3 text-white font-medium rounded-sm hover:opacity-90 transition-opacity"
-                  style={{ backgroundColor: brandConfig.colors.primary }}
+                  className="px-8 py-3 text-white font-medium rounded-sm hover:opacity-90 transition-opacity bg-brand"
                 >
                   {t('landing.startButton')}
                 </button>
-                <button className="px-8 py-3 border font-medium rounded-sm hover:bg-gray-50 transition-colors"
-                  style={{ borderColor: brandConfig.colors.primary, color: brandConfig.colors.primary }}>
+                <button className="px-8 py-3 border font-medium rounded-sm hover:bg-gray-50 transition-colors border-brand text-brand">
                   {t('landing.learnMore')}
                 </button>
               </div>
@@ -117,27 +99,27 @@ export default function Home() {
 
             {/* Horizon Europe Information */}
             <div className="mb-20">
-              <h3 className="text-2xl font-light mb-8" style={{ color: brandConfig.colors.primary }}>
+              <h3 className="text-2xl font-light mb-8 text-brand">
                 {t('horizonInfo.title')}
               </h3>
               <div className="grid md:grid-cols-3 gap-8">
                 <div>
-                  <p className="text-3xl font-light mb-2" style={{ color: brandConfig.colors.primary }}>€438 Mio</p>
+                  <p className="text-3xl font-light mb-2 text-brand">€438 Mio</p>
                   <p className="text-sm text-gray-600">{t('horizonInfo.budget.description')}</p>
                 </div>
                 <div>
-                  <p className="text-3xl font-light mb-2" style={{ color: brandConfig.colors.primary }}>100%</p>
+                  <p className="text-3xl font-light mb-2 text-brand">100%</p>
                   <p className="text-sm text-gray-600">{t('horizonInfo.funding.description')}</p>
                 </div>
                 <div>
-                  <p className="text-3xl font-light mb-2" style={{ color: brandConfig.colors.primary }}>€2-5 Mio</p>
+                  <p className="text-3xl font-light mb-2 text-brand">€2-5 Mio</p>
                   <p className="text-sm text-gray-600">{t('horizonInfo.typical.description')}</p>
                 </div>
               </div>
               
               <div className="mt-12 space-y-6">
                 <div className="flex items-start gap-4">
-                  <Target className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                  <Target className="w-5 h-5 mt-1 flex-shrink-0 text-brand" />
                   <div>
                     <h4 className="font-medium mb-1">{t('horizonInfo.pillar1.title')}</h4>
                     <p className="text-sm text-gray-600">
@@ -146,7 +128,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <Globe className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                  <Globe className="w-5 h-5 mt-1 flex-shrink-0 text-brand" />
                   <div>
                     <h4 className="font-medium mb-1">{t('horizonInfo.pillar2.title')}</h4>
                     <p className="text-sm text-gray-600">
@@ -155,7 +137,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <Award className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                  <Award className="w-5 h-5 mt-1 flex-shrink-0 text-brand" />
                   <div>
                     <h4 className="font-medium mb-1">{t('horizonInfo.pillar3.title')}</h4>
                     <p className="text-sm text-gray-600">
@@ -168,14 +150,13 @@ export default function Home() {
 
             {/* How We Help Section */}
             <div className="mb-20">
-              <h3 className="text-2xl font-light mb-8" style={{ color: brandConfig.colors.primary }}>
+              <h3 className="text-2xl font-light mb-8 text-brand">
                 {t('process.title')}
               </h3>
               <div className="space-y-8">
                 <div className="flex gap-6">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: 'rgba(48, 73, 69, 0.1)' }}>
-                    <span className="font-semibold" style={{ color: brandConfig.colors.primary }}>1</span>
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center bg-brand/10">
+                    <span className="font-semibold text-brand">1</span>
                   </div>
                   <div className="flex-1">
                     <h4 className="font-medium mb-2">{t('process.step1.title')}</h4>
@@ -186,9 +167,8 @@ export default function Home() {
                 </div>
                 
                 <div className="flex gap-6">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: 'rgba(48, 73, 69, 0.1)' }}>
-                    <span className="font-semibold" style={{ color: brandConfig.colors.primary }}>2</span>
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center bg-brand/10">
+                    <span className="font-semibold text-brand">2</span>
                   </div>
                   <div className="flex-1">
                     <h4 className="font-medium mb-2">{t('process.step2.title')}</h4>
@@ -199,9 +179,8 @@ export default function Home() {
                 </div>
                 
                 <div className="flex gap-6">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: 'rgba(48, 73, 69, 0.1)' }}>
-                    <span className="font-semibold" style={{ color: brandConfig.colors.primary }}>3</span>
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center bg-brand/10">
+                    <span className="font-semibold text-brand">3</span>
                   </div>
                   <div className="flex-1">
                     <h4 className="font-medium mb-2">{t('process.step3.title')}</h4>
@@ -212,9 +191,8 @@ export default function Home() {
                 </div>
                 
                 <div className="flex gap-6">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: 'rgba(48, 73, 69, 0.1)' }}>
-                    <span className="font-semibold" style={{ color: brandConfig.colors.primary }}>4</span>
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center bg-brand/10">
+                    <span className="font-semibold text-brand">4</span>
                   </div>
                   <div className="flex-1">
                     <h4 className="font-medium mb-2">{t('process.step4.title')}</h4>
@@ -227,8 +205,8 @@ export default function Home() {
             </div>
 
             {/* Ukraine-Specific Opportunities */}
-            <div className="mb-20 p-8 rounded" style={{ backgroundColor: 'rgba(48, 73, 69, 0.03)' }}>
-              <h3 className="text-2xl font-light mb-8" style={{ color: brandConfig.colors.primary }}>
+            <div className="mb-20 p-8 rounded bg-brand/5">
+              <h3 className="text-2xl font-light mb-8 text-brand">
                 🇺🇦 {t('ukraine.title')}
               </h3>
               <div className="grid md:grid-cols-2 gap-8">
@@ -236,15 +214,15 @@ export default function Home() {
                   <h4 className="font-medium mb-3">{t('ukraine.horizon.title')}</h4>
                   <ul className="space-y-2 text-sm text-gray-600">
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-brand" />
                       <span>{t('ukraine.horizon.item1')}</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-brand" />
                       <span>{t('ukraine.horizon.item2')}</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-brand" />
                       <span>{t('ukraine.horizon.item3')}</span>
                     </li>
                   </ul>
@@ -253,15 +231,15 @@ export default function Home() {
                   <h4 className="font-medium mb-3">MSCA4Ukraine Status 2025</h4>
                   <ul className="space-y-2 text-sm text-gray-600">
                     <li className="flex items-start gap-2">
-                      <Award className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <Award className="w-4 h-4 mt-0.5 flex-shrink-0 text-brand" />
                       <span><strong>176 Forschende unterstützt:</strong> In 24 Gastländern (Stand: Q1 2025)</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <Award className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <Award className="w-4 h-4 mt-0.5 flex-shrink-0 text-brand" />
                       <span><strong>Management-Call offen:</strong> Bis 16.09.2025 für Verwaltungsorganisation</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <Award className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <Award className="w-4 h-4 mt-0.5 flex-shrink-0 text-brand" />
                       <span><strong>Keine weiteren Fellowship-Calls:</strong> Aktuell keine neuen Ausschreibungen geplant</span>
                     </li>
                   </ul>
@@ -278,7 +256,7 @@ export default function Home() {
 
             {/* CERV Programme */}
             <div className="mb-20">
-              <h3 className="text-2xl font-light mb-8" style={{ color: brandConfig.colors.primary }}>
+              <h3 className="text-2xl font-light mb-8 text-brand">
                 CERV Programme – Ukraine seit 09.01.2024 assoziiert
               </h3>
               <p className="text-gray-600 mb-6">
@@ -288,32 +266,28 @@ export default function Home() {
               </p>
               <div className="grid md:grid-cols-4 gap-6">
                 <div className="text-center">
-                  <div className="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center"
-                    style={{ backgroundColor: 'rgba(48, 73, 69, 0.1)' }}>
+                  <div className="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center bg-brand/10">
                     <span className="text-lg">⚖️</span>
                   </div>
                   <h4 className="font-medium text-sm mb-1">Gleichheit & Rechte</h4>
                   <p className="text-xs text-gray-600">Anti-Diskriminierung und Gleichstellung</p>
                 </div>
                 <div className="text-center">
-                  <div className="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center"
-                    style={{ backgroundColor: 'rgba(48, 73, 69, 0.1)' }}>
+                  <div className="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center bg-brand/10">
                     <span className="text-lg">🤝</span>
                   </div>
                   <h4 className="font-medium text-sm mb-1">Bürgerbeteiligung</h4>
                   <p className="text-xs text-gray-600">Demokratische Partizipation</p>
                 </div>
                 <div className="text-center">
-                  <div className="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center"
-                    style={{ backgroundColor: 'rgba(48, 73, 69, 0.1)' }}>
+                  <div className="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center bg-brand/10">
                     <span className="text-lg">🛡️</span>
                   </div>
                   <h4 className="font-medium text-sm mb-1">Daphne</h4>
                   <p className="text-xs text-gray-600">Gewaltprävention und Opferschutz</p>
                 </div>
                 <div className="text-center">
-                  <div className="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center"
-                    style={{ backgroundColor: 'rgba(48, 73, 69, 0.1)' }}>
+                  <div className="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center bg-brand/10">
                     <span className="text-lg">🌟</span>
                   </div>
                   <h4 className="font-medium text-sm mb-1">EU-Werte</h4>
@@ -324,7 +298,7 @@ export default function Home() {
 
             {/* Expertise Section */}
             <div className="mb-20">
-              <h3 className="text-2xl font-light mb-8" style={{ color: brandConfig.colors.primary }}>
+              <h3 className="text-2xl font-light mb-8 text-brand">
                 Unsere Expertise
               </h3>
               <div className="grid md:grid-cols-2 gap-12">
@@ -337,15 +311,15 @@ export default function Home() {
                   </p>
                   <ul className="space-y-2">
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-brand" />
                       <span className="text-sm text-gray-600">Associated Country Status der Ukraine in Horizon Europe</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-brand" />
                       <span className="text-sm text-gray-600">Civil Society Facility Programme</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-brand" />
                       <span className="text-sm text-gray-600">ERASMUS+ Capacity Building</span>
                     </li>
                   </ul>
@@ -359,15 +333,15 @@ export default function Home() {
                   </p>
                   <ul className="space-y-2">
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-brand" />
                       <span className="text-sm text-gray-600">Cluster 2: Culture, Creativity & Inclusive Society</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-brand" />
                       <span className="text-sm text-gray-600">Cluster 3: Civil Security for Society</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: brandConfig.colors.primary }} />
+                      <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-brand" />
                       <span className="text-sm text-gray-600">Cluster 6: Food, Bioeconomy & Natural Resources</span>
                     </li>
                   </ul>
@@ -378,11 +352,11 @@ export default function Home() {
 
             {/* Upcoming Deadlines */}
             <div className="mb-20">
-              <h3 className="text-2xl font-light mb-8" style={{ color: brandConfig.colors.primary }}>
+              <h3 className="text-2xl font-light mb-8 text-brand">
                 Aktuelle Ausschreibungen 2025
               </h3>
               
-              <div className="mb-6 p-4 rounded" style={{ backgroundColor: 'rgba(48, 73, 69, 0.05)' }}>
+              <div className="mb-6 p-4 rounded bg-brand/5">
                 <p className="text-sm mb-2">
                   <strong>Wichtige Termine 2025:</strong>
                 </p>
@@ -398,65 +372,65 @@ export default function Home() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between py-3 border-b border-gray-100">
                   <div className="flex items-center gap-4">
-                    <Calendar className="w-5 h-5" style={{ color: brandConfig.colors.primary }} />
+                    <Calendar className="w-5 h-5 text-brand" />
                     <div>
                       <p className="font-medium">HORIZON-CL2-2025-DEMOCRACY-01</p>
                       <p className="text-sm text-gray-600">Counter disinformation & FIMI (€3-3.5M per project)</p>
                     </div>
                   </div>
-                  <span className="text-sm font-medium" style={{ color: brandConfig.colors.primary }}>
+                  <span className="text-sm font-medium text-brand">
                     Deadline: 16.09.2025
                   </span>
                 </div>
                 
                 <div className="flex items-center justify-between py-3 border-b border-gray-100">
                   <div className="flex items-center gap-4">
-                    <Calendar className="w-5 h-5" style={{ color: brandConfig.colors.primary }} />
+                    <Calendar className="w-5 h-5 text-brand" />
                     <div>
                       <p className="font-medium">HORIZON-CL2-2025-DEMOCRACY-AUTOCRACY</p>
                       <p className="text-sm text-gray-600">Understanding autocratic appeal (€10.5M total, nature & drivers research)</p>
                     </div>
                   </div>
-                  <span className="text-sm font-medium" style={{ color: brandConfig.colors.primary }}>
+                  <span className="text-sm font-medium text-brand">
                     Deadline: 16.09.2025
                   </span>
                 </div>
                 
                 <div className="flex items-center justify-between py-3 border-b border-gray-100">
                   <div className="flex items-center gap-4">
-                    <Calendar className="w-5 h-5" style={{ color: brandConfig.colors.primary }} />
+                    <Calendar className="w-5 h-5 text-brand" />
                     <div>
                       <p className="font-medium">HORIZON-CL2-2025-HERITAGE</p>
                       <p className="text-sm text-gray-600">Cultural Heritage topics (€82.5M total budget, €2.5-4M per project)</p>
                     </div>
                   </div>
-                  <span className="text-sm font-medium" style={{ color: brandConfig.colors.primary }}>
+                  <span className="text-sm font-medium text-brand">
                     Deadline: 16.09.2025
                   </span>
                 </div>
                 
                 <div className="flex items-center justify-between py-3 border-b border-gray-100">
                   <div className="flex items-center gap-4">
-                    <Calendar className="w-5 h-5" style={{ color: brandConfig.colors.primary }} />
+                    <Calendar className="w-5 h-5 text-brand" />
                     <div>
                       <p className="font-medium">MSCA4Ukraine Management Call</p>
                       <p className="text-sm text-gray-600">Organization to manage next phase (No new fellowships planned)</p>
                     </div>
                   </div>
-                  <span className="text-sm font-medium" style={{ color: brandConfig.colors.primary }}>
+                  <span className="text-sm font-medium text-brand">
                     Deadline: 16.09.2025
                   </span>
                 </div>
                 
                 <div className="flex items-center justify-between py-3 border-b border-gray-100">
                   <div className="flex items-center gap-4">
-                    <Calendar className="w-5 h-5" style={{ color: brandConfig.colors.primary }} />
+                    <Calendar className="w-5 h-5 text-brand" />
                     <div>
                       <p className="font-medium">CERV-2025-CHILD</p>
                       <p className="text-sm text-gray-600">Children's rights incl. Ukrainian refugees (Deadline: 29.04.2025)</p>
                     </div>
                   </div>
-                  <span className="text-sm font-medium" style={{ color: brandConfig.colors.primary }}>
+                  <span className="text-sm font-medium text-brand">
                     Expected: Nov 2025
                   </span>
                 </div>
@@ -465,33 +439,33 @@ export default function Home() {
 
             {/* Features - Minimalist */}
             <div className="mb-20">
-              <h3 className="text-2xl font-light mb-8" style={{ color: brandConfig.colors.primary }}>
+              <h3 className="text-2xl font-light mb-8 text-brand">
                 Plattform Features
               </h3>
               <div className="grid md:grid-cols-4 gap-8">
                 <div className="text-center">
-                  <FileText className="w-8 h-8 mx-auto mb-3" style={{ color: brandConfig.colors.primary }} />
+                  <FileText className="w-8 h-8 mx-auto mb-3 text-brand" />
                   <h4 className="font-medium mb-2 text-sm">Template Library</h4>
                   <p className="text-xs text-gray-600">
                     Vorgefertigte Templates für alle Horizon Europe Antragstypen
                   </p>
                 </div>
                 <div className="text-center">
-                  <Users className="w-8 h-8 mx-auto mb-3" style={{ color: brandConfig.colors.primary }} />
+                  <Users className="w-8 h-8 mx-auto mb-3 text-brand" />
                   <h4 className="font-medium mb-2 text-sm">Partner Matching</h4>
                   <p className="text-xs text-gray-600">
                     Zugang zu unserem Netzwerk qualifizierter Projektpartner
                   </p>
                 </div>
                 <div className="text-center">
-                  <Globe className="w-8 h-8 mx-auto mb-3" style={{ color: brandConfig.colors.primary }} />
+                  <Globe className="w-8 h-8 mx-auto mb-3 text-brand" />
                   <h4 className="font-medium mb-2 text-sm">Multilingual</h4>
                   <p className="text-xs text-gray-600">
                     Verfügbar in Deutsch, Ukrainisch und Englisch
                   </p>
                 </div>
                 <div className="text-center">
-                  <Shield className="w-8 h-8 mx-auto mb-3" style={{ color: brandConfig.colors.primary }} />
+                  <Shield className="w-8 h-8 mx-auto mb-3 text-brand" />
                   <h4 className="font-medium mb-2 text-sm">GDPR Compliant</h4>
                   <p className="text-xs text-gray-600">
                     Vollständige Datenschutz-Compliance nach EU-Standards
@@ -502,7 +476,7 @@ export default function Home() {
 
             {/* CTA */}
             <div className="text-center py-12">
-              <h3 className="text-2xl font-light mb-6" style={{ color: brandConfig.colors.primary }}>
+              <h3 className="text-2xl font-light mb-6 text-brand">
                 Bereit für Ihren EU-Antrag?
               </h3>
               <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -511,11 +485,9 @@ export default function Home() {
               </p>
               <button
                 onClick={() => {
-                  console.log('Bottom button clicked, setting showChat to true');
                   setShowChat(true);
                 }}
-                className="px-12 py-4 text-white font-medium rounded-sm hover:opacity-90 transition-opacity inline-flex items-center gap-2"
-                style={{ backgroundColor: brandConfig.colors.primary }}
+                className="px-12 py-4 text-white font-medium rounded-sm hover:opacity-90 transition-opacity inline-flex items-center gap-2 bg-brand"
               >
                 Jetzt Starten
                 <ArrowRight className="w-5 h-5" />

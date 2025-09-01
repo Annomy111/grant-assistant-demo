@@ -2,7 +2,7 @@
  * Test helper utilities for Puppeteer tests
  */
 
-const TEST_URL = process.env.TEST_URL || 'https://grant-assistant-demo.netlify.app';
+const TEST_URL = 'http://localhost:3000';
 
 /**
  * Wait for an element and return it
