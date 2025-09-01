@@ -792,7 +792,7 @@ export default function PresentationPage() {
       slide.points.forEach(point => {
         // Word wrap for long lines
         const lines = pdf.splitTextToSize(point, 250);
-        lines.forEach(line => {
+        lines.forEach((line: string) => {
           pdf.text('• ' + line, 25, yPos);
           yPos += 8;
         });
